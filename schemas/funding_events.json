@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "funding_events",
+  "description": "Funding rounds for robotics and embodied-AI companies",
+  "type": "object",
+  "required": ["funding_id", "organization_id", "date", "amount_millions_usd", "round", "source_url"],
+  "properties": {
+    "funding_id": {"type": "string"},
+    "organization_id": {"type": "string"},
+    "date": {"type": "string", "format": "date"},
+    "amount_millions_usd": {"type": "number"},
+    "round": {"type": "string", "enum": ["pre_seed", "seed", "series_a", "series_b", "series_c", "series_d", "series_e", "growth", "debt", "grant", "unknown"]},
+    "source_url": {"type": "string", "format": "uri"},
+    "source_type": {"type": "string"},
+    "notes": {"type": "string"}
+  }
+}

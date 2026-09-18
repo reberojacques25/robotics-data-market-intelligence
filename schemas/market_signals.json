@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "market_signals",
+  "description": "Market events: funding, partnerships, acquisitions, model launches, dataset releases",
+  "type": "object",
+  "required": [
+    "signal_id",
+    "organization_id",
+    "signal_type",
+    "date",
+    "description",
+    "source_url",
+    "evidence_strength"
+  ],
+  "properties": {
+    "signal_id": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "signal_type": {
+      "type": "string",
+      "enum": [
+        "funding_round",
+        "partnership",
+        "acquisition",
+        "model_launch",
+        "dataset_release",
+        "hiring_campaign",
+        "facility_expansion",
+        "product_launch",
+        "regulatory_milestone",
+        "research_breakthrough",
+        "data_services_offering",
+        "expansion"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "description": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "evidence_strength": {
+      "type": "string",
+      "enum": [
+        "direct",
+        "strong_indirect",
+        "weak_indirect"
+      ]
+    }
+  }
+}

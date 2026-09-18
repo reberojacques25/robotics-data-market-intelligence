@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "datasets",
+  "description": "Registry of publicly available robot-learning datasets",
+  "type": "object",
+  "required": ["dataset_id", "dataset_name", "owner_organization_id", "direct_url", "access_type", "format", "license", "commercial_use_status", "release_date"],
+  "properties": {
+    "dataset_id": {"type": "string"},
+    "dataset_name": {"type": "string"},
+    "owner_organization_id": {"type": "string"},
+    "direct_url": {"type": "string", "format": "uri"},
+    "download_url": {"type": "string", "format": "uri"},
+    "access_type": {"type": "string", "enum": ["public_download", "gated", "streaming", "api", "request_access"]},
+    "format": {"type": "string", "description": "Comma-separated: RLDS, TFDS, Parquet, MP4, HDF5, etc."},
+    "approximate_size_gb": {"type": "number"},
+    "episodes_or_trajectories": {"type": "integer"},
+    "hours": {"type": "number"},
+    "tasks": {"type": "integer"},
+    "environments": {"type": "integer"},
+    "robot_platforms": {"type": "string"},
+    "geographic_coverage": {"type": "string"},
+    "start_date": {"type": "string", "format": "date"},
+    "end_date": {"type": "string", "format": "date"},
+    "release_date": {"type": "string", "format": "date"},
+    "update_date": {"type": "string", "format": "date"},
+    "license": {"type": "string"},
+    "commercial_use_status": {"type": "string", "enum": ["allowed", "restricted", "unclear", "per_component"]},
+    "registration_required": {"type": "boolean"},
+    "api_available": {"type": "boolean"},
+    "maintenance_status": {"type": "string", "enum": ["active", "uncertain", "archived"]},
+    "provenance_notes": {"type": "string"}
+  }
+}

@@ -1,0 +1,32 @@
+signal_id,organization_id,signal_type,date,description,source_url,evidence_strength
+SIG-001,ORG-001,model_launch,2025-02-20,Figure AI announced Helix VLA model trained on teleoperated demonstration data,https://www.figure.ai/blog/helix,direct
+SIG-002,ORG-001,model_launch,2025-06-15,Figure AI announced Helix 02 with 1000+ hours of human-motion data,https://www.figure.ai/blog/helix-02,direct
+SIG-003,ORG-001,dataset_release,2026-03-10,Figure AI announced Index global-scale human behavior dataset,https://www.figure.ai/blog/index,direct
+SIG-004,ORG-002,model_launch,2024-10-31,Physical Intelligence launched pi0 trained on 10000 hours of demonstrations,https://www.physicalintelligence.company/blog/pi0,direct
+SIG-005,ORG-002,model_launch,2025-02-15,Physical Intelligence launched pi0.5 general-purpose robot brain,https://www.physicalintelligence.company/blog/pi05,direct
+SIG-006,ORG-003,funding_round,2024-07-15,Skild AI raised 300M seed round for robot foundation model development,https://techcrunch.com/2024/07/15/skild-ai-raises-300m/,direct
+SIG-007,ORG-010,dataset_release,2024-01-30,DROID released 76000 teleoperated demonstrations from 50 collectors,https://droid-dataset.github.io,direct
+SIG-008,ORG-006,dataset_release,2025-09-20,LeRobot ecosystem reached 16K+ datasets from 2.2K+ contributors,https://huggingface.co/blog/lerobot,direct
+SIG-009,ORG-005,partnership,2024-09-15,NVIDIA released BridgeData2 LeRobot conversion for standardized robot data,https://huggingface.co/datasets/nvidia/BridgeData2_LeRobot_v3,direct
+SIG-010,ORG-014,product_launch,2024-09-10,Agility Robotics launched Digit robot for warehouse deployment,https://agilityrobotics.com/news/digit-launch,direct
+SIG-011,ORG-021,product_launch,2024-10-10,Tesla demonstrated Optimus humanoid with teleoperation data collection,https://www.tesla.com/ai,strong_indirect
+SIG-012,ORG-013,model_launch,2025-05-15,1X Technologies announced NEO humanoid with embodied AI model,https://www.1x.tech,strong_indirect
+SIG-013,ORG-007,data_services_offering,2025-08-20,Claru launched VLA training data services with 10000+ contributors,https://www.claru.ai,direct
+SIG-014,ORG-008,data_services_offering,2026-09-05,Nexdata announced 10000+ hours of dexterous-hand teleoperation data,https://www.nexdata.ai/blog/physical-ai-data,strong_indirect
+SIG-015,ORG-019,model_launch,2023-12-15,Google DeepMind developed RT-2 vision-language-action model,https://deepmind.google/blog,direct
+SIG-016,ORG-026,dataset_release,2025-12-01,AgiBot World released with 1M+ trajectories from 100 robots in Shanghai facility,https://www.agibot.com/world,direct
+SIG-017,ORG-027,partnership,2026-01-20,JD.com partners with Suqian city government for 10M hours robot training data with 100K employees and 500K workers,https://www.jd.com/corporate-news,direct
+SIG-018,ORG-028,product_launch,2026-02-15,UBTech reported 80M USD in humanoid robot sales to three Chinese data collection centers,https://www.ubtrobot.com/news,direct
+SIG-019,ORG-029,partnership,2025-11-10,China Mobile ordered 17.6M USD worth of robots from Unitree and AgiBot for data collection,https://www.chinamobile.com/news,direct
+SIG-020,ORG-030,dataset_release,2026-03-01,EgoDex dataset with 829 hours 338K episodes captured using Apple Vision Pro,https://arxiv.org/abs/egodex,direct
+SIG-021,ORG-005,model_launch,2025-03-15,NVIDIA launched GR00T N1 and GR00T N1.5 with synthetic trajectory generation,https://www.nvidia.com/groot,direct
+SIG-022,ORG-019,model_launch,2025-03-15,Google DeepMind launched Gemini Robotics models trained on thousands of hours of action data,https://deepmind.google/blog/gemini-robotics,direct
+SIG-023,ORG-001,expansion,2025-10-01,Figure Project Go-Big uses human video from 100K+ homes and 500M sq ft of offices,https://www.figure.ai/blog/go-big,direct
+SIG-024,ORG-002,model_launch,2025-02-15,Physical Intelligence launched pi0.5 with 400 hours of mobile-manipulation data from 100 homes,https://www.physicalintelligence.company/blog/pi05,direct
+SIG-025,ORG-021,hiring_campaign,2025-08-01,Tesla hiring data collection operators at 25-48 USD/hour for Optimus humanoid,https://www.tesla.com/careers,direct
+SIG-026,ORG-034,data_services_offering,2025-01-15,Sensei launched robotics training data platform at 1/10th cost via YC,https://www.ycombinator.com/companies/sensei,direct
+SIG-027,ORG-035,data_services_offering,2024-12-01,Lumos launched backpack-style system for robotics data collection outside labs,https://kr-asia.com/this-company-has-built-a-backpack-style-system-for-robotics-data-collection,direct
+SIG-028,ORG-036,data_services_offering,2025-10-01,RCSV launched managed VR teleoperation service with 200+ manipulation scenarios,https://www.roboticscenter.ai/compare/robot-data-platforms,direct
+SIG-029,ORG-023,expansion,2025-06-01,Amazon Robotics fine-tuning manipulation models for novel SKU categories in warehouse deployments,https://aws.amazon.com/robotics,strong_indirect
+SIG-030,ORG-041,expansion,2025-09-01,Waymo adding in-vehicle manipulation capabilities for parcel delivery and loading assistance,https://www.waymo.com/blog,strong_indirect
+SIG-031,ORG-005,funding_round,2024-11-15,NVIDIA invested in GR00T robot foundation model development,https://www.nvidia.com/news,strong_indirect

@@ -1,0 +1,872 @@
+{
+  "opportunity_classification": [
+    {
+      "organization_id": "ORG-001",
+      "tier": "A",
+      "reason": "Confirmed commercial relationship(s): 2 confirmed",
+      "direct_evidence_count": 6,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 4,
+      "commercial_relationship_count": 2,
+      "total_evidence_count": 6
+    },
+    {
+      "organization_id": "ORG-002",
+      "tier": "A",
+      "reason": "Confirmed commercial relationship(s): 1 confirmed",
+      "direct_evidence_count": 4,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 3,
+      "commercial_relationship_count": 1,
+      "total_evidence_count": 4
+    },
+    {
+      "organization_id": "ORG-003",
+      "tier": "B",
+      "reason": "Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-004",
+      "tier": "B",
+      "reason": "Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-005",
+      "tier": "B",
+      "reason": "Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing",
+      "direct_evidence_count": 2,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 2
+    },
+    {
+      "organization_id": "ORG-006",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-007",
+      "tier": "A",
+      "reason": "Confirmed commercial relationship(s): 1 confirmed",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 1,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-008",
+      "tier": "C",
+      "reason": "Strong indirect evidence (1 signals) with data requirements",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 1,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-009",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-010",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-011",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-012",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-013",
+      "tier": "C",
+      "reason": "Strong indirect evidence (1 signals) with data requirements",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-014",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-015",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-016",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-017",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-018",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-019",
+      "tier": "B",
+      "reason": "Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing",
+      "direct_evidence_count": 2,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 2,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 2
+    },
+    {
+      "organization_id": "ORG-020",
+      "tier": "C",
+      "reason": "Strong indirect evidence (1 signals) with data requirements",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-021",
+      "tier": "B",
+      "reason": "Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 2,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 2
+    },
+    {
+      "organization_id": "ORG-022",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-023",
+      "tier": "C",
+      "reason": "Strong indirect evidence (1 signals) with data requirements",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-024",
+      "tier": "C",
+      "reason": "Some indirect evidence (1 signals) but insufficient for specific data requirement",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-025",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-026",
+      "tier": "B",
+      "reason": "Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing",
+      "direct_evidence_count": 2,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 2
+    },
+    {
+      "organization_id": "ORG-027",
+      "tier": "B",
+      "reason": "Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-028",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-029",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-030",
+      "tier": "B",
+      "reason": "Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-031",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-032",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-033",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-034",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-035",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-036",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-037",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-038",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-039",
+      "tier": "C",
+      "reason": "Direct evidence of robotics activity (1 signals) but no specific data requirement documented",
+      "direct_evidence_count": 1,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-040",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-041",
+      "tier": "C",
+      "reason": "Strong indirect evidence (1 signals) with data requirements",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-042",
+      "tier": "C",
+      "reason": "Some indirect evidence (1 signals) but insufficient for specific data requirement",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-043",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-044",
+      "tier": "C",
+      "reason": "Strong indirect evidence (1 signals) with data requirements",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-045",
+      "tier": "C",
+      "reason": "Strong indirect evidence (1 signals) with data requirements",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 1,
+      "data_requirement_count": 1,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-046",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-047",
+      "tier": "D",
+      "reason": "No evidence of robotics data activity",
+      "direct_evidence_count": 0,
+      "strong_indirect_count": 0,
+      "data_requirement_count": 0,
+      "commercial_relationship_count": 0,
+      "total_evidence_count": 0
+    }
+  ],
+  "supplier_comparison": [
+    {
+      "organization_id": "ORG-006",
+      "name": "Hugging Face Inc.",
+      "segment": "manipulation",
+      "country": "US",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-007",
+      "name": "Claru",
+      "segment": "manipulation;humanoid",
+      "country": "US",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-008",
+      "name": "Nexdata Inc.",
+      "segment": "manipulation;service",
+      "country": "US",
+      "evidence_count": 1,
+      "direct_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-025",
+      "name": "Rerun Inc.",
+      "segment": "manipulation",
+      "country": "US",
+      "evidence_count": 0,
+      "direct_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-031",
+      "name": "Scale AI Inc.",
+      "segment": "manipulation;embodied_ai",
+      "country": "US",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-032",
+      "name": "Encord Ltd.",
+      "segment": "manipulation",
+      "country": "GB",
+      "evidence_count": 0,
+      "direct_evidence_count": 0
+    },
+    {
+      "organization_id": "ORG-033",
+      "name": "AY-Robots",
+      "segment": "manipulation",
+      "country": "DE",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-034",
+      "name": "Sensei",
+      "segment": "manipulation",
+      "country": "US",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-035",
+      "name": "Lumos",
+      "segment": "manipulation",
+      "country": "KR",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-036",
+      "name": "RCSV",
+      "segment": "manipulation",
+      "country": "US",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-037",
+      "name": "Labellerr",
+      "segment": "manipulation;humanoid",
+      "country": "US",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-038",
+      "name": "Cogito Tech",
+      "segment": "manipulation;defense;healthcare",
+      "country": "US",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-039",
+      "name": "Extend Robotics",
+      "segment": "manipulation;humanoid",
+      "country": "GB",
+      "evidence_count": 1,
+      "direct_evidence_count": 1
+    },
+    {
+      "organization_id": "ORG-040",
+      "name": "Datoric",
+      "segment": "manipulation",
+      "country": "US",
+      "evidence_count": 0,
+      "direct_evidence_count": 0
+    }
+  ],
+  "data_modality_demand_map": {
+    "modalities": [
+      [
+        "RGB",
+        24
+      ],
+      [
+        "state",
+        22
+      ],
+      [
+        "action",
+        20
+      ],
+      [
+        "language",
+        6
+      ],
+      [
+        "depth",
+        3
+      ],
+      [
+        "multi_camera",
+        2
+      ],
+      [
+        "gripper_state",
+        2
+      ],
+      [
+        "IMU",
+        2
+      ],
+      [
+        "joint_position",
+        1
+      ],
+      [
+        "joint_velocity",
+        1
+      ],
+      [
+        "motor_torque",
+        1
+      ],
+      [
+        "text",
+        1
+      ],
+      [
+        "video",
+        1
+      ],
+      [
+        "egocentric_video",
+        1
+      ],
+      [
+        "audio",
+        1
+      ],
+      [
+        "force_torque",
+        1
+      ],
+      [
+        "hand_tracking",
+        1
+      ],
+      [
+        "synthetic",
+        1
+      ],
+      [
+        "egocentric",
+        1
+      ],
+      [
+        "motion_capture",
+        1
+      ]
+    ],
+    "task_types": [
+      [
+        "manipulation",
+        25
+      ],
+      [
+        "household",
+        8
+      ],
+      [
+        "humanoid",
+        7
+      ],
+      [
+        "dexterous",
+        5
+      ],
+      [
+        "logistics",
+        3
+      ],
+      [
+        "navigation",
+        3
+      ],
+      [
+        "warehouse",
+        2
+      ],
+      [
+        "mobile",
+        2
+      ],
+      [
+        "whole_body",
+        1
+      ],
+      [
+        "locomotion",
+        1
+      ],
+      [
+        "assembly",
+        1
+      ],
+      [
+        "folding",
+        1
+      ],
+      [
+        "cable_routing",
+        1
+      ],
+      [
+        "packing",
+        1
+      ],
+      [
+        "plugging",
+        1
+      ],
+      [
+        "service",
+        1
+      ],
+      [
+        "industrial",
+        1
+      ],
+      [
+        "office",
+        1
+      ],
+      [
+        "delivery",
+        1
+      ],
+      [
+        "manufacturing",
+        1
+      ]
+    ],
+    "embodiments": [
+      [
+        "multiple",
+        13
+      ],
+      [
+        "humanoid",
+        9
+      ],
+      [
+        "arm",
+        1
+      ],
+      [
+        "human",
+        1
+      ],
+      [
+        "mobile_manipulator",
+        1
+      ]
+    ],
+    "collection_methods": [
+      [
+        "teleoperation",
+        18
+      ],
+      [
+        "teleoperation;human_video",
+        2
+      ],
+      [
+        "human_video",
+        2
+      ],
+      [
+        "motion_capture",
+        1
+      ],
+      [
+        "teleoperation;simulation",
+        1
+      ],
+      [
+        "teleoperation;motion_capture",
+        1
+      ]
+    ]
+  },
+  "market_signal_timeline": {
+    "2025": {
+      "model_launch": 7,
+      "dataset_release": 2,
+      "data_services_offering": 3,
+      "partnership": 1,
+      "expansion": 3,
+      "hiring_campaign": 1
+    },
+    "2026": {
+      "dataset_release": 2,
+      "data_services_offering": 1,
+      "partnership": 1,
+      "product_launch": 1
+    },
+    "2024": {
+      "model_launch": 1,
+      "funding_round": 2,
+      "dataset_release": 1,
+      "partnership": 1,
+      "product_launch": 2,
+      "data_services_offering": 1
+    },
+    "2023": {
+      "model_launch": 1
+    }
+  },
+  "dataset_completeness_summary": {
+    "total_datasets": 13,
+    "public_download": 6,
+    "gated_or_restricted": 7,
+    "commercial_use_allowed": 7,
+    "total_trajectories_indexed": 3477744,
+    "total_hours_indexed": 15155.0
+  },
+  "measurability_assessment": {
+    "directly_measurable": [
+      "Number and timing of publicly released robot-learning datasets",
+      "Dataset scale: trajectories, episodes, hours, tasks, embodiments, scenes",
+      "Publicly stated use of teleoperation, demonstrations, human-motion data",
+      "Geographic location of organizations and disclosed collection locations",
+      "Frequency of evidence events over time",
+      "Technology/task distribution: manipulation, bimanual, mobile, humanoid, logistics",
+      "Open versus gated access, license conditions, commercial use status",
+      "Number and type of public supplier claims and documented partnerships"
+    ],
+    "measurable_with_integration": [
+      "Growth in visible robotics-data activity using time-series index of releases, hiring, model launches",
+      "Geographic clusters of likely demand using HQ, facilities, job locations",
+      "Relationship between funding events and later data signals",
+      "Company opportunity ranking based on explicit evidence and confidence-weighted score",
+      "Supplier comparison based on modalities, formats, task coverage, customer proof",
+      "Market gaps between open-data coverage and customer-specific requirements"
+    ],
+    "proxy_only": [
+      "Growth in demand for robot demonstrations (job posts, dataset releases, model papers as proxies)",
+      "Likelihood of external procurement (inferred from scale needs, hardware diversity, teleoperation programs)",
+      "Addressable-market direction (observable signals rather than opaque market-size reports)",
+      "Correlation between foundation-model activity and demand for multimodal data"
+    ],
+    "not_reliably_measurable": [
+      "Total global spending on robot demonstration data",
+      "Dataset contract prices, per-episode rates, teleoperator compensation, supplier margins",
+      "Full proprietary dataset sizes for most companies",
+      "All buyer-supplier relationships",
+      "Exact internal versus outsourced share of collection",
+      "Revenue attributable to robot-data services alone at diversified suppliers",
+      "Company-level demand volumes unless disclosed in contracts, papers, or procurement"
+    ]
+  }
+}

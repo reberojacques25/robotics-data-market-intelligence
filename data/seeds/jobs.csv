@@ -1,0 +1,17 @@
+job_id,organization_id,role_title,job_url,location,posting_date,employment_type,data_keywords,inferred_need,evidence_strength,active_status
+JOB-001,ORG-004,Large Behavior Models Intern,https://www.tri.global/careers,Los Altos CA,2024-11-05,internship,teleoperation;demonstration;VLA;imitation learning,model training,strong_indirect,closed
+JOB-002,ORG-001,Teleoperation Operator,https://www.figure.ai/careers,Sunnyvale CA,2025-03-01,full_time,teleoperation;demonstration collection,data collection,direct,open
+JOB-003,ORG-001,Robotics Data Collection Engineer,https://www.figure.ai/careers,Sunnyvale CA,2025-04-15,full_time,data collection;teleoperation;demonstration,data collection,direct,open
+JOB-004,ORG-002,Robot Learning Research Engineer,https://www.physicalintelligence.company/careers,San Francisco CA,2025-01-20,full_time,demonstration;teleoperation;VLA;robot learning,model training,direct,open
+JOB-005,ORG-003,Robotics Data Engineer,https://www.skild.ai/careers,Pittsburgh PA,2025-02-10,full_time,teleoperation;demonstration;data collection,data collection,strong_indirect,open
+JOB-006,ORG-013,Embodied AI Data Specialist,https://www.1x.tech/careers,Moss Norway,2025-05-01,full_time,teleoperation;demonstration;embodied AI,data collection,strong_indirect,open
+JOB-007,ORG-021,Optimus Data Collection Lead,https://www.tesla.com/careers,Austin TX,2025-06-01,full_time,teleoperation;demonstration;data collection,data collection,strong_indirect,open
+JOB-008,ORG-016,Teleoperation Specialist,https://sanctuary.ai/careers,Vancouver CA,2025-04-20,full_time,teleoperation;demonstration,data collection,strong_indirect,open
+JOB-009,ORG-015,Robot Data Collection Engineer,https://apptronik.com/careers,Austin TX,2025-05-15,full_time,data collection;teleoperation,data collection,strong_indirect,open
+JOB-010,ORG-022,Humanoid Data Engineer,https://www.unitree.com/careers,Hangzhou CN,2025-07-01,full_time,teleoperation;demonstration;humanoid,data collection,strong_indirect,open
+JOB-011,ORG-026,Robot Data Collection Specialist,https://www.agibot.com/careers,Shanghai CN,2025-08-15,full_time,teleoperation;demonstration;data collection;humanoid,data collection,direct,open
+JOB-012,ORG-027,Robot Training Data Operator,https://www.jd.com/careers,Suqian CN,2026-01-20,contractor,teleoperation;demonstration;data collection,data collection,direct,open
+JOB-013,ORG-021,Data Collection Operator,https://www.tesla.com/careers,Palo Alto CA,2025-08-01,full_time,teleoperation;data collection;motion capture;Optimus,data collection,direct,open
+JOB-014,ORG-046,VLA Researcher,https://jobs.ashbyhq.com/sereact/d410b572-0fcd-4283-8856-f1a1dfd95f51,Zurich CH,2025-07-01,full_time,VLA;embodied AI;imitation learning,model training,direct,open
+JOB-015,ORG-047,Machine Learning Engineer Robotics,https://jobs.alleycorp.com/companies/avatar-robotics-2/jobs/88455934,San Francisco CA,2026-08-01,full_time,robotics;embodied AI;data collection,model training,strong_indirect,open
+JOB-016,ORG-031,Robotics Data Collection Lead,https://www.scale.com/careers,San Francisco CA,2025-06-10,full_time,data collection;annotation;robotics;embodied AI,data collection,direct,open

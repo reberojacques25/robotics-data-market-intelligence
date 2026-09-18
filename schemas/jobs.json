@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "jobs",
+  "description": "Job postings as leading indicators of robotics data demand",
+  "type": "object",
+  "required": ["job_id", "organization_id", "role_title", "job_url", "location", "posting_date", "data_keywords", "inferred_need", "evidence_strength"],
+  "properties": {
+    "job_id": {"type": "string"},
+    "organization_id": {"type": "string"},
+    "role_title": {"type": "string"},
+    "job_url": {"type": "string", "format": "uri"},
+    "location": {"type": "string"},
+    "posting_date": {"type": "string", "format": "date"},
+    "employment_type": {"type": "string", "enum": ["full_time", "contractor", "temporary", "internship", "unknown"]},
+    "data_keywords": {"type": "string"},
+    "inferred_need": {"type": "string"},
+    "evidence_strength": {"type": "string", "enum": ["direct", "strong_indirect", "weak_indirect"]},
+    "active_status": {"type": "string", "enum": ["open", "closed", "unknown"]}
+  }
+}

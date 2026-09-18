@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "data_requirements",
+  "description": "What kinds of robotics data each organization needs",
+  "type": "object",
+  "required": [
+    "requirement_id",
+    "organization_id",
+    "data_category",
+    "modality",
+    "task_type",
+    "embodiment",
+    "collection_method",
+    "stated_or_inferred",
+    "requirement_confidence"
+  ],
+  "properties": {
+    "requirement_id": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "event_id": {
+      "type": "string"
+    },
+    "data_category": {
+      "type": "string",
+      "enum": [
+        "robot_demonstration",
+        "teleoperation",
+        "human_motion",
+        "egocentric_video",
+        "annotation",
+        "simulation",
+        "synthetic_data",
+        "multi_modal"
+      ]
+    },
+    "modality": {
+      "type": "string",
+      "description": "Comma-separated: RGB, depth, state, action, force_torque, tactile, language, multi_camera, etc."
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "embodiment": {
+      "type": "string",
+      "enum": [
+        "arm",
+        "dual_arm",
+        "mobile_manipulator",
+        "humanoid",
+        "quadruped",
+        "hand",
+        "drone",
+        "multiple",
+        "human"
+      ]
+    },
+    "collection_method": {
+      "type": "string"
+    },
+    "stated_or_inferred": {
+      "type": "string",
+      "enum": [
+        "stated",
+        "inferred"
+      ]
+    },
+    "requirement_confidence": {
+      "type": "string",
+      "enum": [
+        "direct",
+        "strong_proxy",
+        "tentative",
+        "weak_indirect"
+      ]
+    },
+    "quality_attributes": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+requirement_id,organization_id,event_id,data_category,modality,task_type,embodiment,collection_method,stated_or_inferred,requirement_confidence,quality_attributes
+DR-001,ORG-001,EVT-001,teleoperation,RGB;multi_camera;state;action;gripper_state;language,manipulation;humanoid;logistics,humanoid,teleoperation,stated,direct,multi-operator;curation;filtering;auto-generated language conditioning;corrective behavior
+DR-002,ORG-001,EVT-003,human_motion,state;joint_position;joint_velocity,whole_body;locomotion;manipulation,humanoid,motion_capture,stated,direct,1000+ hours;joint-level retargeted;whole-body controller
+DR-003,ORG-001,EVT-004,robot_demonstration,RGB;multi_camera;state;action;language,manipulation;household;logistics,humanoid,teleoperation,stated,direct,373 tasks per 1000 hours;1146 objects;116 environments;global-scale
+DR-004,ORG-002,EVT-005,teleoperation,RGB;state;action;gripper_state,manipulation;dexterous;assembly;folding;cable_routing;packing;plugging,multiple,teleoperation,stated,direct,10000 hours;7 robot configurations;68 tasks;proprietary
+DR-005,ORG-002,EVT-006,robot_demonstration,RGB;state;action,manipulation;dexterous,multiple,teleoperation,stated,direct,8 robot platforms;open-source and proprietary data combined
+DR-006,ORG-003,EVT-008,teleoperation,RGB;state;motor_torque,manipulation,arm,teleoperation,stated,direct,video demonstrations;less than 1 hour fine-tuning;precise motor torque sequences
+DR-007,ORG-004,EVT-009,robot_demonstration,RGB;state;action;language;text;video,manipulation;household,multiple,teleoperation,stated,direct,teleoperated robot data;human demonstrations;multimodal
+DR-008,ORG-007,EVT-010,teleoperation,RGB;egocentric_video;state;action,manipulation;humanoid,multiple,teleoperation;human_video,stated,direct,10000+ contributors;egocentric capture;managed teleoperation on client hardware;RLDS;WebDataset;HDF5;LeRobot
+DR-009,ORG-008,EVT-011,teleoperation,RGB;state;action,manipulation;dexterous;service,multiple,teleoperation,stated,strong_proxy,10000+ hours dexterous hand;266000+ images;robotic lawnmowers and vacuums
+DR-010,ORG-021,EVT-017,teleoperation,RGB;state;action,manipulation;humanoid,humanoid,teleoperation,inferred,strong_proxy,large-scale teleoperation for Optimus;limited public detail
+DR-011,ORG-013,EVT-018,teleoperation,RGB;state;action,manipulation;humanoid,humanoid,teleoperation,inferred,strong_proxy,embodied AI model for NEO;teleoperation data collection
+DR-012,ORG-019,EVT-019,robot_demonstration,RGB;state;action;language,manipulation,multiple,teleoperation,stated,direct,RT-2 VLA model trained on demonstration data
+DR-013,ORG-020,EVT-020,egocentric_video,RGB;depth;IMU;audio,household;manipulation;navigation,multiple,human_video,stated,strong_proxy,Aria egocentric data platform for embodied AI research
+DR-014,ORG-026,EVT-021,robot_demonstration,RGB;state;action;depth;force_torque,manipulation;dexterous;household;industrial,humanoid,teleoperation,stated,direct,1M+ trajectories;217 tasks;3000+ objects;100 robots;4000 m2 facility
+DR-015,ORG-027,EVT-023,teleoperation,RGB;state;action,warehouse;logistics;manipulation,multiple,teleoperation,stated,direct,10M hours target;100K employees;500K external workers
+DR-016,ORG-030,EVT-026,egocentric_video,RGB;depth;IMU;hand_tracking,manipulation;dexterous;household,human,teleoperation;human_video,stated,direct,829 hours;338K episodes;194 tasks;Vision Pro capture
+DR-017,ORG-005,EVT-035,robot_demonstration,RGB;state;action;synthetic,manipulation;humanoid;navigation,humanoid,teleoperation;simulation,stated,direct,88 real hours;827 expanded hours;780K simulation trajectories;20M hours video for Cosmos
+DR-018,ORG-019,EVT-036,robot_demonstration,RGB;state;action;language,manipulation;household;navigation,multiple,teleoperation,stated,direct,thousands of hours;12 months collection;100 demos for adaptation
+DR-019,ORG-001,EVT-037,egocentric_video,RGB;egocentric,household;office;manipulation,humanoid,human_video,stated,direct,100K+ homes;500M sq ft offices;Project Go-Big
+DR-020,ORG-002,EVT-038,teleoperation,RGB;state;action,manipulation;mobile;household,mobile_manipulator,teleoperation,stated,direct,400 hours;100 homes;mobile manipulation
+DR-021,ORG-021,EVT-039,teleoperation,RGB;state;action;motion_capture,manipulation;humanoid,humanoid,teleoperation;motion_capture,stated,direct,25-48 USD/hour;data collection operators;Palo Alto campus
+DR-022,ORG-044,EVT-040,robot_demonstration,RGB;state;action;language,manipulation;humanoid,multiple,teleoperation,inferred,strong_proxy,fine-tuning VLA models on domain-specific robot data
+DR-023,ORG-023,EVT-041,robot_demonstration,RGB;state;action,warehouse;manipulation,multiple,teleoperation,inferred,strong_proxy,fine-tuning manipulation models for novel SKU categories
+DR-024,ORG-041,EVT-043,robot_demonstration,RGB;state;action,manipulation;mobile;delivery,multiple,teleoperation,inferred,weak_indirect,in-vehicle manipulation for parcel delivery and loading
+DR-025,ORG-045,EVT-045,robot_demonstration,RGB;state;action,manufacturing;manipulation,multiple,teleoperation,stated,direct,millions of demonstrations;internal hyperscale collection;proprietary

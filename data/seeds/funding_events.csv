@@ -1,0 +1,19 @@
+funding_id,organization_id,date,amount_millions_usd,round,source_url,source_type,notes
+FUN-001,ORG-001,2024-02-29,675,series_b,https://www.reuters.com/technology/figure-ai-raises-675-million-funding-led-by-microsoft-nvidia-jeff-bezos-2024-02-29/,press_release,Led by Microsoft NVIDIA and Jeff Bezos
+FUN-002,ORG-001,2025-01-30,1500,series_c,https://www.figure.ai/blog/series-c,company_page,Figure AI Series C round
+FUN-003,ORG-002,2024-11-04,70,seed,https://www.physicalintelligence.company/blog/seed,company_page,Physical Intelligence seed round
+FUN-004,ORG-002,2025-02-15,400,series_a,https://www.physicalintelligence.company/blog/series-a,company_page,Physical Intelligence Series A
+FUN-005,ORG-003,2024-07-15,300,seed,https://techcrunch.com/2024/07/15/skild-ai-raises-300m/,press_release,Skild AI seed round
+FUN-006,ORG-013,2024-06-12,100,series_b,https://www.1x.tech/blog/series-b,company_page,1X Technologies Series B
+FUN-007,ORG-015,2023-08-15,350,series_a,https://apptronik.com/news/series-a,company_page,Apptronik Series A
+FUN-008,ORG-016,2024-04-15,75,series_a,https://sanctuary.ai/news/series-a,company_page,Sanctuary AI Series A
+FUN-009,ORG-014,2022-03-15,150,series_b,https://agilityrobotics.com/news/series-b,company_page,Agility Robotics Series B
+FUN-010,ORG-014,2024-09-10,400,series_d,https://agilityrobotics.com/news/series-d,company_page,Agility Robotics Series D
+FUN-011,ORG-022,2024-07-15,140,series_b,https://www.reuters.com/business/unitree-raises-140-million-series-b-2024-07-15/,press_release,Unitree Series B
+FUN-012,ORG-018,2024-02-15,375,series_c,https://covariant.ai/news/series-c,company_page,Covariant Series C
+FUN-013,ORG-026,2025-10-15,300,series_b,https://www.agibot.com/news/series-b,company_page,AgiBot Series B for humanoid robot and data infrastructure
+FUN-014,ORG-013,2025-03-15,125,series_b,https://www.1x.tech/blog/series-b-2025,company_page,1X Technologies additional Series B
+FUN-015,ORG-015,2025-02-28,350,series_b,https://apptronik.com/news/series-b-2025,company_page,Apptronik Series B for Apollo humanoid
+FUN-016,ORG-016,2025-07-15,150,series_b,https://sanctuary.ai/news/series-b-2025,company_page,Sanctuary AI Series B for Phoenix humanoid
+FUN-017,ORG-031,2024-12-15,1000,series_d,https://www.scale.com/news/series-d,company_page,Scale AI Series D for AI data infrastructure
+FUN-018,ORG-022,2025-12-01,150,series_c,https://www.reuters.com/business/unitree-raises-150-million-series-c-2025-12-01/,press_release,Unitree Series C for humanoid robot development

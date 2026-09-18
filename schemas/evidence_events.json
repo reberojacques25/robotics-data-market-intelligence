@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "evidence_events",
+  "description": "Core table: every key claim maps to a source record with provenance",
+  "type": "object",
+  "required": [
+    "event_id",
+    "organization_id",
+    "event_date",
+    "signal_type",
+    "claim_text",
+    "source_url",
+    "source_type",
+    "evidence_strength",
+    "review_status"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "organization_id": {
+      "type": "string"
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "discovery_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "signal_type": {
+      "type": "string",
+      "enum": [
+        "dataset_release",
+        "teleoperation_collection",
+        "job_posting",
+        "partnership",
+        "model_launch",
+        "procurement",
+        "funding",
+        "data_services_offering",
+        "publication",
+        "expansion",
+        "acquisition",
+        "facility_announcement"
+      ]
+    },
+    "claim_text": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "company_page",
+        "academic_paper",
+        "dataset_card",
+        "procurement_database",
+        "press_release",
+        "job_post",
+        "regulatory_filing",
+        "blog_post",
+        "conference_publication",
+        "investor_report",
+        "partnership_announcement",
+        "other",
+        "project_page"
+      ]
+    },
+    "source_publisher": {
+      "type": "string"
+    },
+    "primary_source_flag": {
+      "type": "boolean"
+    },
+    "evidence_strength": {
+      "type": "string",
+      "enum": [
+        "direct",
+        "strong_indirect",
+        "weak_indirect"
+      ]
+    },
+    "confidence_score": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "extraction_method": {
+      "type": "string",
+      "enum": [
+        "api",
+        "download",
+        "manual_review",
+        "web_extraction"
+      ]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "unreviewed",
+        "verified",
+        "rejected",
+        "stale"
+      ]
+    }
+  }
+}

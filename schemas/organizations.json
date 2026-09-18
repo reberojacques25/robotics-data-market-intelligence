@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "organizations",
+  "description": "Registry of organizations relevant to the robotics data market",
+  "type": "object",
+  "required": ["organization_id", "legal_name", "organization_type", "robotics_segment", "headquarters_country", "status", "last_verified_date"],
+  "properties": {
+    "organization_id": {"type": "string", "description": "Stable internal identifier, e.g. ORG-001"},
+    "legal_name": {"type": "string"},
+    "trading_name": {"type": "string"},
+    "organization_type": {"type": "string", "enum": ["robot_oem", "foundation_model_developer", "research_lab", "dataset_provider", "data_services_provider", "integrator", "university", "public_buyer", "consortium", "other"]},
+    "headquarters_country": {"type": "string", "description": "ISO 3166-1 alpha-2 code"},
+    "headquarters_city": {"type": "string"},
+    "operating_regions": {"type": "string"},
+    "robotics_segment": {"type": "string"},
+    "website": {"type": "string", "format": "uri"},
+    "status": {"type": "string", "enum": ["active", "acquired", "inactive", "unknown"]},
+    "last_verified_date": {"type": "string", "format": "date"},
+    "description": {"type": "string"}
+  }
+}

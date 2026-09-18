@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Data Market Intelligence Dashboard</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --card-bg: #1a1d27;
+            --text: #e4e6eb;
+            --text-muted: #8b8e98;
+            --accent: #4f9cf9;
+            --accent-hover: #3b8be6;
+            --tier-a: #2ecc71;
+            --tier-b: #f39c12;
+            --tier-c: #3498db;
+            --tier-d: #7f8c8d;
+            --border: #2a2d3a;
+            --radius: 8px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { font-size: 1.8em; margin-bottom: 8px; }
+        h2 { font-size: 1.3em; margin: 30px 0 12px; color: var(--accent); }
+        h3 { font-size: 1.1em; margin: 20px 0 8px; }
+        .subtitle { color: var(--text-muted); margin-bottom: 30px; font-size: 0.95em; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value { font-size: 2em; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.85em; color: var(--text-muted); margin-top: 4px; }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        th { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.8em; }
+        td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+        tr:hover { background: rgba(79, 156, 249, 0.05); }
+        .tier-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+        .tier-A { background: rgba(46, 204, 113, 0.2); color: var(--tier-a); }
+        .tier-B { background: rgba(243, 156, 18, 0.2); color: var(--tier-b); }
+        .tier-C { background: rgba(52, 152, 219, 0.2); color: var(--tier-c); }
+        .tier-D { background: rgba(127, 140, 141, 0.2); color: var(--tier-d); }
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .filter-bar select, .filter-bar input {
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 8px 12px;
+            font-size: 0.9em;
+        }
+        .filter-bar select:focus, .filter-bar input:focus { outline: none; border-color: var(--accent); }
+        .evidence-link { color: var(--accent); text-decoration: none; }
+        .evidence-link:hover { text-decoration: underline; }
+        .bar-chart { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+        .bar { height: 20px; border-radius: 4px; background: var(--accent); min-width: 2px; transition: width 0.3s; }
+        .bar-label { font-size: 0.85em; min-width: 120px; }
+        .bar-value { font-size: 0.85em; color: var(--text-muted); }
+        .section-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab {
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+        .tab.active { color: var(--accent); border-color: var(--accent); }
+        .tab:hover { color: var(--text); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .evidence-row { padding: 12px; border-bottom: 1px solid var(--border); }
+        .evidence-claim { margin-bottom: 4px; }
+        .evidence-meta { font-size: 0.8em; color: var(--text-muted); }
+        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85em; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Robotics Data Market Intelligence Dashboard</h1>
+    <p class="subtitle">Evidence-based market intelligence for robotics demonstration data, teleoperation, and embodied-AI training data</p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">47</div>
+            <div class="stat-label">Organizations</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">45</div>
+            <div class="stat-label">Evidence Events</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">13</div>
+            <div class="stat-label">Datasets Indexed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">3,477,744</div>
+            <div class="stat-label">Trajectories Indexed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">15,155</div>
+            <div class="stat-label">Hours Indexed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">16</div>
+            <div class="stat-label">Job Postings</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">18</div>
+            <div class="stat-label">Funding Events</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">31</div>
+            <div class="stat-label">Market Signals</div>
+        </div>
+    </div>
+
+    <div class="section-tabs">
+        <div class="tab active" onclick="showTab('opportunity')">Opportunity Analysis</div>
+        <div class="tab" onclick="showTab('organizations')">Organizations</div>
+        <div class="tab" onclick="showTab('evidence')">Evidence Browser</div>
+        <div class="tab" onclick="showTab('suppliers')">Suppliers</div>
+        <div class="tab" onclick="showTab('modalities')">Data Demand</div>
+        <div class="tab" onclick="showTab('timeline')">Timeline</div>
+        <div class="tab" onclick="showTab('measurability')">Measurability</div>
+    </div>
+
+    <!-- Opportunity Analysis Tab -->
+    <div id="opportunity" class="tab-content active">
+        <h2>Opportunity Classification (A/B/C/D Tiers)</h2>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Count</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td>3</td>
+                        <td>Confirmed buyer/user — direct evidence of purchasing, licensing, commissioning, or using external robotics data</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>8</td>
+                        <td>Strong potential buyer — substantial evidence of data requirements but no direct evidence of external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>22</td>
+                        <td>Possible buyer — relevant robotics/AI activity but insufficient evidence of a specific data requirement</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>14</td>
+                        <td>Not enough evidence — excluded from opportunity analysis</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>Detailed Classifications</h3>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Organization</th>
+                        <th>Tier</th>
+                        <th>Direct Evidence</th>
+                        <th>Data Reqs</th>
+                        <th>Commercial Rel.</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ORG-001</td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td>6</td>
+                        <td>4</td>
+                        <td>2</td>
+                        <td style="font-size: 0.85em;">Confirmed commercial relationship(s): 2 confirmed</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-002</td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Confirmed commercial relationship(s): 1 confirmed</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-007</td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Confirmed commercial relationship(s): 1 confirmed</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-005</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-019</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-026</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-003</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-004</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-021</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-027</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-030</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-006</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-010</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-011</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-028</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-029</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-031</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-033</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-034</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-035</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-036</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-037</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-038</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-039</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-008</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-013</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-020</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-023</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-024</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Some indirect evidence (1 signals) but insufficient for specific data requirement</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-041</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-042</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Some indirect evidence (1 signals) but insufficient for specific data requirement</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-044</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-045</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-009</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-012</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-014</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-015</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-016</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-017</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-018</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-022</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-025</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-032</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-040</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-043</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-046</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                    <tr>
+                        <td>ORG-047</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Organizations Tab -->
+    <div id="organizations" class="tab-content">
+        <h2>Organizations</h2>
+        <div class="filter-bar">
+            <input type="text" id="org-search" placeholder="Search organizations..." oninput="filterTable('org-table', 'org-search')">
+            <select id="org-tier-filter" onchange="filterByTier()">
+                <option value="">All Tiers</option>
+                <option value="A">Tier A</option>
+                <option value="B">Tier B</option>
+                <option value="C">Tier C</option>
+                <option value="D">Tier D</option>
+            </select>
+        </div>
+        <div class="card">
+            <table id="org-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Country</th>
+                        <th>Segment</th>
+                        <th>Tier</th>
+                        <th>Evidence</th>
+                        <th>Data Reqs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-tier="A">
+                        <td>ORG-001</td>
+                        <td>Figure AI Inc.</td>
+                        <td>foundation_model_developer</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">humanoid</td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td>6</td>
+                        <td>4</td>
+                    </tr>
+                    <tr data-tier="A">
+                        <td>ORG-002</td>
+                        <td>Physical Intelligence Inc.</td>
+                        <td>foundation_model_developer</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td>4</td>
+                        <td>3</td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td>ORG-003</td>
+                        <td>Skild AI Inc.</td>
+                        <td>foundation_model_developer</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td>ORG-004</td>
+                        <td>Toyota Research Institute</td>
+                        <td>research_lab</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">humanoid;manipulation</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td>ORG-005</td>
+                        <td>NVIDIA Corporation</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;simulation</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-006</td>
+                        <td>Hugging Face Inc.</td>
+                        <td>dataset_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="A">
+                        <td>ORG-007</td>
+                        <td>Claru</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;humanoid</td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-008</td>
+                        <td>Nexdata Inc.</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;service</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-009</td>
+                        <td>Open X-Embodiment Consortium</td>
+                        <td>consortium</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-010</td>
+                        <td>Stanford University</td>
+                        <td>research_lab</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-011</td>
+                        <td>University of California Berkeley</td>
+                        <td>research_lab</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-012</td>
+                        <td>Microsoft Corporation</td>
+                        <td>research_lab</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-013</td>
+                        <td>1X Technologies</td>
+                        <td>foundation_model_developer</td>
+                        <td>NO</td>
+                        <td style="font-size: 0.85em;">humanoid</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-014</td>
+                        <td>Agility Robotics Inc.</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">humanoid</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-015</td>
+                        <td>Apptronik Inc.</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">humanoid</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-016</td>
+                        <td>Sanctuary Cognitive Systems Corporation</td>
+                        <td>robot_oem</td>
+                        <td>CA</td>
+                        <td style="font-size: 0.85em;">humanoid</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-017</td>
+                        <td>Boston Dynamics</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;mobile</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-018</td>
+                        <td>Covariant</td>
+                        <td>foundation_model_developer</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td>ORG-019</td>
+                        <td>Google DeepMind</td>
+                        <td>research_lab</td>
+                        <td>GB</td>
+                        <td style="font-size: 0.85em;">manipulation;mobile</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>2</td>
+                        <td>2</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-020</td>
+                        <td>Meta AI</td>
+                        <td>research_lab</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;mobile</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td>ORG-021</td>
+                        <td>Tesla Inc.</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">humanoid</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>2</td>
+                        <td>2</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-022</td>
+                        <td>Unitree Robotics</td>
+                        <td>robot_oem</td>
+                        <td>CN</td>
+                        <td style="font-size: 0.85em;">humanoid;quadruped</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-023</td>
+                        <td>AWS Robotics</td>
+                        <td>integrator</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">warehouse;mobile</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-024</td>
+                        <td>Symbotic Inc.</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">warehouse</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-025</td>
+                        <td>Rerun Inc.</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td>ORG-026</td>
+                        <td>Zhiyuan Robotics</td>
+                        <td>robot_oem</td>
+                        <td>CN</td>
+                        <td style="font-size: 0.85em;">humanoid;manipulation</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td>ORG-027</td>
+                        <td>JD.com</td>
+                        <td>robot_oem</td>
+                        <td>CN</td>
+                        <td style="font-size: 0.85em;">warehouse;logistics</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-028</td>
+                        <td>UBTech Robotics</td>
+                        <td>robot_oem</td>
+                        <td>CN</td>
+                        <td style="font-size: 0.85em;">humanoid</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-029</td>
+                        <td>China Mobile</td>
+                        <td>public_buyer</td>
+                        <td>CN</td>
+                        <td style="font-size: 0.85em;">telecommunication;robotics</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td>ORG-030</td>
+                        <td>Apple Inc.</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;humanoid</td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-031</td>
+                        <td>Scale AI Inc.</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;embodied_ai</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-032</td>
+                        <td>Encord Ltd.</td>
+                        <td>data_services_provider</td>
+                        <td>GB</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-033</td>
+                        <td>AY-Robots</td>
+                        <td>data_services_provider</td>
+                        <td>DE</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-034</td>
+                        <td>Sensei</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-035</td>
+                        <td>Lumos</td>
+                        <td>data_services_provider</td>
+                        <td>KR</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-036</td>
+                        <td>RCSV</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-037</td>
+                        <td>Labellerr</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;humanoid</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-038</td>
+                        <td>Cogito Tech</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;defense;healthcare</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-039</td>
+                        <td>Extend Robotics</td>
+                        <td>data_services_provider</td>
+                        <td>GB</td>
+                        <td style="font-size: 0.85em;">manipulation;humanoid</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-040</td>
+                        <td>Datoric</td>
+                        <td>data_services_provider</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-041</td>
+                        <td>Waymo LLC</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">autonomous_vehicle;mobile</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-042</td>
+                        <td>Zoox</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">autonomous_vehicle;mobile</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-043</td>
+                        <td>Berkshire Grey</td>
+                        <td>robot_oem</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">warehouse</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-044</td>
+                        <td>OpenAI</td>
+                        <td>foundation_model_developer</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation;humanoid</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td>ORG-045</td>
+                        <td>BMW Group</td>
+                        <td>robot_oem</td>
+                        <td>DE</td>
+                        <td style="font-size: 0.85em;">manufacturing;manipulation</td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-046</td>
+                        <td>Sereact</td>
+                        <td>foundation_model_developer</td>
+                        <td>CH</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr data-tier="D">
+                        <td>ORG-047</td>
+                        <td>Avatar Robotics</td>
+                        <td>foundation_model_developer</td>
+                        <td>US</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Evidence Browser Tab -->
+    <div id="evidence" class="tab-content">
+        <h2>Evidence Browser</h2>
+        <div class="filter-bar">
+            <input type="text" id="evidence-search" placeholder="Search evidence..." oninput="filterEvidence()">
+            <select id="evidence-strength-filter" onchange="filterEvidence()">
+                <option value="">All Strengths</option>
+                <option value="direct">Direct</option>
+                <option value="strong_indirect">Strong Indirect</option>
+                <option value="weak_indirect">Weak Indirect</option>
+            </select>
+        </div>
+        <div class="card" id="evidence-list">
+            <div class="evidence-row" data-strength="direct" data-search="Figure AI Inc. Figure states Helix was trained using a high-quality multi-robot multi-operator dataset of roughly 500 hours of diverse teleoperated behaviors including multi-operator collection curation filtering auto-generated natural-language conditioning and operator-standardization work teleoperation_collection">
+                <div class="evidence-claim">Figure states Helix was trained using a high-quality multi-robot multi-operator dataset of roughly 500 hours of diverse teleoperated behaviors including multi-operator collection curation filtering auto-generated natural-language conditioning and operator-standardization work</div>
+                <div class="evidence-meta">
+                    <strong>Figure AI Inc.</strong> · teleoperation_collection · 2025-02-20 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.figure.ai/blog/helix" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Figure AI Inc. Figure stated that just eight hours of well-curated demonstration data could generate a capable policy for the tested logistics use case and described retaining appropriate corrective behavior while excluding slow missed or operator-error demonstrations teleoperation_collection">
+                <div class="evidence-claim">Figure stated that just eight hours of well-curated demonstration data could generate a capable policy for the tested logistics use case and described retaining appropriate corrective behavior while excluding slow missed or operator-error demonstrations</div>
+                <div class="evidence-meta">
+                    <strong>Figure AI Inc.</strong> · teleoperation_collection · 2025-02-20 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.figure.ai/blog/helix" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Figure AI Inc. Figure reported that Helix 02 whole-body controller used over 1000 hours of joint-level retargeted human-motion data teleoperation_collection">
+                <div class="evidence-claim">Figure reported that Helix 02 whole-body controller used over 1000 hours of joint-level retargeted human-motion data</div>
+                <div class="evidence-meta">
+                    <strong>Figure AI Inc.</strong> · teleoperation_collection · 2025-06-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.figure.ai/blog/helix-02" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Figure AI Inc. Figure announced Index described as a global-scale dataset of human behavior; reports that each 1000 hours contains 373 unique tasks 1146 objects and 116 environments dataset_release">
+                <div class="evidence-claim">Figure announced Index described as a global-scale dataset of human behavior; reports that each 1000 hours contains 373 unique tasks 1146 objects and 116 environments</div>
+                <div class="evidence-meta">
+                    <strong>Figure AI Inc.</strong> · dataset_release · 2026-03-10 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.figure.ai/blog/index" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Physical Intelligence Inc. Physical Intelligence pi0 paper states training mixture contains about 10000 hours of demonstrations uses open-source OXE data and includes proprietary dexterous manipulation datasets across seven robot configurations and 68 tasks teleoperation_collection">
+                <div class="evidence-claim">Physical Intelligence pi0 paper states training mixture contains about 10000 hours of demonstrations uses open-source OXE data and includes proprietary dexterous manipulation datasets across seven robot configurations and 68 tasks</div>
+                <div class="evidence-meta">
+                    <strong>Physical Intelligence Inc.</strong> · teleoperation_collection · 2024-10-31 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.physicalintelligence.company/blog/pi0" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Physical Intelligence Inc. Physical Intelligence states that pi0 training uses open-source robot manipulation datasets and its own dataset from dexterous tasks across eight robot platforms model_launch">
+                <div class="evidence-claim">Physical Intelligence states that pi0 training uses open-source robot manipulation datasets and its own dataset from dexterous tasks across eight robot platforms</div>
+                <div class="evidence-meta">
+                    <strong>Physical Intelligence Inc.</strong> · model_launch · 2024-10-31 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.physicalintelligence.company/blog/pi0" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Physical Intelligence Inc. Physical Intelligence states that robot foundation models primarily use manually collected demonstrations including teleoperation and frames demonstrations as the mechanism for defining new behaviors publication">
+                <div class="evidence-claim">Physical Intelligence states that robot foundation models primarily use manually collected demonstrations including teleoperation and frames demonstrations as the mechanism for defining new behaviors</div>
+                <div class="evidence-meta">
+                    <strong>Physical Intelligence Inc.</strong> · publication · 2025-03-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.physicalintelligence.company/blog/foundation-models" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Skild AI Inc. Skild describes teleoperation as the prevailing strategy for collecting precise motor torque sequences and reports fine-tuning from video demonstrations with less than one hour of robot data in one setting publication">
+                <div class="evidence-claim">Skild describes teleoperation as the prevailing strategy for collecting precise motor torque sequences and reports fine-tuning from video demonstrations with less than one hour of robot data in one setting</div>
+                <div class="evidence-meta">
+                    <strong>Skild AI Inc.</strong> · publication · 2024-12-10 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.skild.ai/blog" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Toyota Research Institute TRI Large Behavior Models internship announcement explicitly says its models are trained on teleoperated robot data in-the-wild human demonstrations images text and video job_posting">
+                <div class="evidence-claim">TRI Large Behavior Models internship announcement explicitly says its models are trained on teleoperated robot data in-the-wild human demonstrations images text and video</div>
+                <div class="evidence-meta">
+                    <strong>Toyota Research Institute</strong> · job_posting · 2024-11-05 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.tri.global/careers" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Claru Claru product page describes 10000+ contributors for egocentric collection and managed teleoperation on client hardware with delivery in RLDS WebDataset HDF5 or LeRobot-compatible forms data_services_offering">
+                <div class="evidence-claim">Claru product page describes 10000+ contributors for egocentric collection and managed teleoperation on client hardware with delivery in RLDS WebDataset HDF5 or LeRobot-compatible forms</div>
+                <div class="evidence-meta">
+                    <strong>Claru</strong> · data_services_offering · 2025-08-20 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.claru.ai" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="Nexdata Inc. Nexdata September 2026 announcement claims 10000+ hours of dexterous-hand teleoperation data and 266000+ images involving robotic lawnmowers and vacuums data_services_offering">
+                <div class="evidence-claim">Nexdata September 2026 announcement claims 10000+ hours of dexterous-hand teleoperation data and 266000+ images involving robotic lawnmowers and vacuums</div>
+                <div class="evidence-meta">
+                    <strong>Nexdata Inc.</strong> · data_services_offering · 2026-09-05 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://www.nexdata.ai/blog/physical-ai-data" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Hugging Face Inc. LeRobot ecosystem reports 16K+ datasets from 2.2K+ contributors in LeRobotDataset format by September 2025 dataset_release">
+                <div class="evidence-claim">LeRobot ecosystem reports 16K+ datasets from 2.2K+ contributors in LeRobotDataset format by September 2025</div>
+                <div class="evidence-meta">
+                    <strong>Hugging Face Inc.</strong> · dataset_release · 2025-09-20 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://huggingface.co/blog/lerobot" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="NVIDIA Corporation NVIDIA BridgeData2 LeRobot conversion demonstrates commercial-friendly data format path through the Hugging Face LeRobot ecosystem dataset_release">
+                <div class="evidence-claim">NVIDIA BridgeData2 LeRobot conversion demonstrates commercial-friendly data format path through the Hugging Face LeRobot ecosystem</div>
+                <div class="evidence-meta">
+                    <strong>NVIDIA Corporation</strong> · dataset_release · 2024-09-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://huggingface.co/datasets/nvidia/BridgeData2_LeRobot_v3" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Stanford University DROID demonstrated a distributed model where 50 collectors gathered 76000 teleoperated trajectories across 564 scenes 86 tasks and three broad regions over 12 months dataset_release">
+                <div class="evidence-claim">DROID demonstrated a distributed model where 50 collectors gathered 76000 teleoperated trajectories across 564 scenes 86 tasks and three broad regions over 12 months</div>
+                <div class="evidence-meta">
+                    <strong>Stanford University</strong> · dataset_release · 2024-01-30 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://droid-dataset.github.io" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="University of California Berkeley BridgeData V2 released with 60096 trajectories 50365 teleoperated demos and 9731 scripted-policy rollouts across 24 environments and 13 skills dataset_release">
+                <div class="evidence-claim">BridgeData V2 released with 60096 trajectories 50365 teleoperated demos and 9731 scripted-policy rollouts across 24 environments and 13 skills</div>
+                <div class="evidence-meta">
+                    <strong>University of California Berkeley</strong> · dataset_release · 2023-07-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://rail-berkeley.github.io/bridgedata" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Figure AI Inc. Figure announced Helix a Vision-Language-Action model trained on teleoperated demonstration data for humanoid robots model_launch">
+                <div class="evidence-claim">Figure announced Helix a Vision-Language-Action model trained on teleoperated demonstration data for humanoid robots</div>
+                <div class="evidence-meta">
+                    <strong>Figure AI Inc.</strong> · model_launch · 2025-02-20 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.figure.ai/blog/helix" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="Tesla Inc. Tesla reported collecting demonstration data for Optimus humanoid robot using teleoperation at scale teleoperation_collection">
+                <div class="evidence-claim">Tesla reported collecting demonstration data for Optimus humanoid robot using teleoperation at scale</div>
+                <div class="evidence-meta">
+                    <strong>Tesla Inc.</strong> · teleoperation_collection · 2024-10-10 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://www.tesla.com/ai" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="1X Technologies 1X Technologies announced embodied AI model development for NEO humanoid robot with teleoperation data collection model_launch">
+                <div class="evidence-claim">1X Technologies announced embodied AI model development for NEO humanoid robot with teleoperation data collection</div>
+                <div class="evidence-meta">
+                    <strong>1X Technologies</strong> · model_launch · 2025-05-15 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://www.1x.tech" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Google DeepMind Google DeepMind developed RT-2 a vision-language-action model for robot manipulation trained on demonstration data model_launch">
+                <div class="evidence-claim">Google DeepMind developed RT-2 a vision-language-action model for robot manipulation trained on demonstration data</div>
+                <div class="evidence-meta">
+                    <strong>Google DeepMind</strong> · model_launch · 2023-12-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://deepmind.google/blog" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="Meta AI Meta FAIR released Aria egocentric data platform for embodied AI research and robot learning dataset_release">
+                <div class="evidence-claim">Meta FAIR released Aria egocentric data platform for embodied AI research and robot learning</div>
+                <div class="evidence-meta">
+                    <strong>Meta AI</strong> · dataset_release · 2024-09-10 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://ai.meta.com/aria" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Zhiyuan Robotics AgiBot World Beta contains 1001552 trajectories 2976.4 hours 217 tasks 3000+ objects collected from a fleet of 100 robots in a 4000 m2 facility in Shanghai dataset_release">
+                <div class="evidence-claim">AgiBot World Beta contains 1001552 trajectories 2976.4 hours 217 tasks 3000+ objects collected from a fleet of 100 robots in a 4000 m2 facility in Shanghai</div>
+                <div class="evidence-meta">
+                    <strong>Zhiyuan Robotics</strong> · dataset_release · 2025-12-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.agibot.com/world" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Zhiyuan Robotics AgiBot announced plan for 1 million real and 10 million simulation data units for robot training teleoperation_collection">
+                <div class="evidence-claim">AgiBot announced plan for 1 million real and 10 million simulation data units for robot training</div>
+                <div class="evidence-meta">
+                    <strong>Zhiyuan Robotics</strong> · teleoperation_collection · 2025-10-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.agibot.com/world" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="JD.com JD.com plans to collect 10 million hours of robot training data in two years with Suqian city government mobilizing 100000 employees and 500000 external workers teleoperation_collection">
+                <div class="evidence-claim">JD.com plans to collect 10 million hours of robot training data in two years with Suqian city government mobilizing 100000 employees and 500000 external workers</div>
+                <div class="evidence-meta">
+                    <strong>JD.com</strong> · teleoperation_collection · 2026-01-20 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.jd.com/corporate-news" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="UBTech Robotics UBTech reported 566 million yuan (80 million USD) in humanoid robot sales to three data-collection centers in China procurement">
+                <div class="evidence-claim">UBTech reported 566 million yuan (80 million USD) in humanoid robot sales to three data-collection centers in China</div>
+                <div class="evidence-meta">
+                    <strong>UBTech Robotics</strong> · procurement · 2026-02-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.ubtrobot.com/news" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="China Mobile China Mobile placed 124 million yuan (17.6 million USD) in robot orders from Unitree and AgiBot specifically for data collection purposes procurement">
+                <div class="evidence-claim">China Mobile placed 124 million yuan (17.6 million USD) in robot orders from Unitree and AgiBot specifically for data collection purposes</div>
+                <div class="evidence-meta">
+                    <strong>China Mobile</strong> · procurement · 2025-11-10 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.chinamobile.com/news" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Apple Inc. EgoDex dataset captured using Apple Vision Pro contains 829 hours 338000 episodes 90 million frames 2.0 TB across 194 tasks demonstrating use of Apple hardware for robotics data capture dataset_release">
+                <div class="evidence-claim">EgoDex dataset captured using Apple Vision Pro contains 829 hours 338000 episodes 90 million frames 2.0 TB across 194 tasks demonstrating use of Apple hardware for robotics data capture</div>
+                <div class="evidence-meta">
+                    <strong>Apple Inc.</strong> · dataset_release · 2026-03-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://arxiv.org/abs/egodex" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Scale AI Inc. Scale AI operates a data engine for frontier AI labs and offers robotics and embodied-AI data collection and annotation programs data_services_offering">
+                <div class="evidence-claim">Scale AI operates a data engine for frontier AI labs and offers robotics and embodied-AI data collection and annotation programs</div>
+                <div class="evidence-meta">
+                    <strong>Scale AI Inc.</strong> · data_services_offering · 2025-06-10 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.scale.com/robotics" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="AY-Robots AY-Robots provides on-demand robot data collection through a global teleoperator network and operates a marketplace of ready-to-train datasets in LeRobot format data_services_offering">
+                <div class="evidence-claim">AY-Robots provides on-demand robot data collection through a global teleoperator network and operates a marketplace of ready-to-train datasets in LeRobot format</div>
+                <div class="evidence-meta">
+                    <strong>AY-Robots</strong> · data_services_offering · 2025-09-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.ay-robots.com/directory/robot-data-collection-companies" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Sensei Sensei helps robotics companies scale and outsource their training data collection; hardware platform enables collection of human-demonstration data at a tenth of the cost and twice the speed data_services_offering">
+                <div class="evidence-claim">Sensei helps robotics companies scale and outsource their training data collection; hardware platform enables collection of human-demonstration data at a tenth of the cost and twice the speed</div>
+                <div class="evidence-meta">
+                    <strong>Sensei</strong> · data_services_offering · 2025-01-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.ycombinator.com/companies/sensei" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Lumos Lumos built a backpack-style system for robotics data collection moving data collection out of labs and into factories homes and offices to scale embodied intelligence data_services_offering">
+                <div class="evidence-claim">Lumos built a backpack-style system for robotics data collection moving data collection out of labs and into factories homes and offices to scale embodied intelligence</div>
+                <div class="evidence-meta">
+                    <strong>Lumos</strong> · data_services_offering · 2024-12-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://kr-asia.com/this-company-has-built-a-backpack-style-system-for-robotics-data-collection" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="RCSV RCSV operates a managed VR teleoperation data collection service with transparent pricing quality guarantees and task diversity across 200+ manipulation scenarios data_services_offering">
+                <div class="evidence-claim">RCSV operates a managed VR teleoperation data collection service with transparent pricing quality guarantees and task diversity across 200+ manipulation scenarios</div>
+                <div class="evidence-meta">
+                    <strong>RCSV</strong> · data_services_offering · 2025-10-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.roboticscenter.ai/compare/robot-data-platforms" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Labellerr Labellerr provides a full-stack annotation platform for robotics and physical AI; processes raw teleoperation sessions into ML-ready training data with AI-powered auto-labeling and human expert validation data_services_offering">
+                <div class="evidence-claim">Labellerr provides a full-stack annotation platform for robotics and physical AI; processes raw teleoperation sessions into ML-ready training data with AI-powered auto-labeling and human expert validation</div>
+                <div class="evidence-meta">
+                    <strong>Labellerr</strong> · data_services_offering · 2025-08-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.labellerr.com/blog/top-teleoperation-companies-humanoid-robotics/" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Cogito Tech Cogito Tech provides expert-in-the-loop teleoperation for high-stakes robots; RoboStream platform captures multimodal data; ISO 9001 27001 SOC 2 certified; FT-recognized fastest-growing company data_services_offering">
+                <div class="evidence-claim">Cogito Tech provides expert-in-the-loop teleoperation for high-stakes robots; RoboStream platform captures multimodal data; ISO 9001 27001 SOC 2 certified; FT-recognized fastest-growing company</div>
+                <div class="evidence-meta">
+                    <strong>Cogito Tech</strong> · data_services_offering · 2025-07-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.cogitotech.com" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Extend Robotics Extend Robotics provides XR teleoperation for collaborative robot arms and humanoid platforms; AMAS system uses teleoperation sessions and real-world edge cases to fine-tune AI models data_services_offering">
+                <div class="evidence-claim">Extend Robotics provides XR teleoperation for collaborative robot arms and humanoid platforms; AMAS system uses teleoperation sessions and real-world edge cases to fine-tune AI models</div>
+                <div class="evidence-meta">
+                    <strong>Extend Robotics</strong> · data_services_offering · 2025-06-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.extendrobotics.com" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="NVIDIA Corporation NVIDIA developed GR00T N1 and GR00T N1.5 robot foundation models using 88 real hours expanded to 827 hours; DexMimicGen generated 780000 simulation trajectories equivalent to 6500 hours; Cosmos used 20M hours of video model_launch">
+                <div class="evidence-claim">NVIDIA developed GR00T N1 and GR00T N1.5 robot foundation models using 88 real hours expanded to 827 hours; DexMimicGen generated 780000 simulation trajectories equivalent to 6500 hours; Cosmos used 20M hours of video</div>
+                <div class="evidence-meta">
+                    <strong>NVIDIA Corporation</strong> · model_launch · 2025-03-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.nvidia.com/groot" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Google DeepMind Google DeepMind developed Gemini Robotics models using thousands of hours of action data collected over 12 months; adaptation uses up to 100 demonstrations producing 70%+ success on new tasks model_launch">
+                <div class="evidence-claim">Google DeepMind developed Gemini Robotics models using thousands of hours of action data collected over 12 months; adaptation uses up to 100 demonstrations producing 70%+ success on new tasks</div>
+                <div class="evidence-meta">
+                    <strong>Google DeepMind</strong> · model_launch · 2025-03-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://deepmind.google/blog/gemini-robotics" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Figure AI Inc. Figure Project Go-Big uses human video from more than 100000 residential units and 500M square feet of offices for egocentric data collection expansion">
+                <div class="evidence-claim">Figure Project Go-Big uses human video from more than 100000 residential units and 500M square feet of offices for egocentric data collection</div>
+                <div class="evidence-meta">
+                    <strong>Figure AI Inc.</strong> · expansion · 2025-10-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.figure.ai/blog/go-big" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Physical Intelligence Inc. Physical Intelligence launched pi0.5 using about 400 hours of mobile-manipulation data from about 100 homes; pi0 pre-training mixture included 9.1% open-source datasets model_launch">
+                <div class="evidence-claim">Physical Intelligence launched pi0.5 using about 400 hours of mobile-manipulation data from about 100 homes; pi0 pre-training mixture included 9.1% open-source datasets</div>
+                <div class="evidence-meta">
+                    <strong>Physical Intelligence Inc.</strong> · model_launch · 2025-02-15 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.physicalintelligence.company/blog/pi05" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="direct" data-search="Tesla Inc. Tesla posted job for data collection operators at 25.25 to 48 per hour for Optimus humanoid robot data collection on Palo Alto campus job_posting">
+                <div class="evidence-claim">Tesla posted job for data collection operators at 25.25 to 48 per hour for Optimus humanoid robot data collection on Palo Alto campus</div>
+                <div class="evidence-meta">
+                    <strong>Tesla Inc.</strong> · job_posting · 2025-08-01 ·
+                    <span class="tier-badge tier-A">direct</span> ·
+                    <a href="https://www.tesla.com/careers" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="OpenAI OpenAI actively fine-tuning large vision-language-action models on domain-specific robot data model_launch">
+                <div class="evidence-claim">OpenAI actively fine-tuning large vision-language-action models on domain-specific robot data</div>
+                <div class="evidence-meta">
+                    <strong>OpenAI</strong> · model_launch · 2025-05-01 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://openai.com/blog" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="AWS Robotics Amazon Robotics fine-tuning manipulation models for novel SKU categories as warehouse deployments encounter new inventory teleoperation_collection">
+                <div class="evidence-claim">Amazon Robotics fine-tuning manipulation models for novel SKU categories as warehouse deployments encounter new inventory</div>
+                <div class="evidence-meta">
+                    <strong>AWS Robotics</strong> · teleoperation_collection · 2025-06-01 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://aws.amazon.com/robotics" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="Symbotic Inc. Symbotic fine-tuning manipulation models for novel SKU categories as warehouse deployments encounter new inventory teleoperation_collection">
+                <div class="evidence-claim">Symbotic fine-tuning manipulation models for novel SKU categories as warehouse deployments encounter new inventory</div>
+                <div class="evidence-meta">
+                    <strong>Symbotic Inc.</strong> · teleoperation_collection · 2025-06-01 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://www.symbotic.com" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="Waymo LLC Waymo adding in-vehicle manipulation capabilities including parcel delivery and loading assistance to next-generation autonomous vehicle platforms expansion">
+                <div class="evidence-claim">Waymo adding in-vehicle manipulation capabilities including parcel delivery and loading assistance to next-generation autonomous vehicle platforms</div>
+                <div class="evidence-meta">
+                    <strong>Waymo LLC</strong> · expansion · 2025-09-01 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://www.waymo.com/blog" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="Zoox Zoox adding in-vehicle manipulation capabilities including parcel delivery and loading assistance to next-generation autonomous vehicle platforms expansion">
+                <div class="evidence-claim">Zoox adding in-vehicle manipulation capabilities including parcel delivery and loading assistance to next-generation autonomous vehicle platforms</div>
+                <div class="evidence-meta">
+                    <strong>Zoox</strong> · expansion · 2025-09-01 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://www.zoox.com/blog" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+            <div class="evidence-row" data-strength="strong_indirect" data-search="BMW Group BMW listed as internal hyperscale data collector with millions of demonstrations; proprietary data not available externally teleoperation_collection">
+                <div class="evidence-claim">BMW listed as internal hyperscale data collector with millions of demonstrations; proprietary data not available externally</div>
+                <div class="evidence-meta">
+                    <strong>BMW Group</strong> · teleoperation_collection · 2025-04-01 ·
+                    <span class="tier-badge tier-B">strong_indirect</span> ·
+                    <a href="https://www.bmwgroup.com" target="_blank" class="evidence-link">Source</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suppliers Tab -->
+    <div id="suppliers" class="tab-content">
+        <h2>Supplier & Competitor Landscape</h2>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Supplier</th>
+                        <th>Segment</th>
+                        <th>Country</th>
+                        <th>Evidence Count</th>
+                        <th>Direct Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hugging Face Inc.</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td>US</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Claru</td>
+                        <td style="font-size: 0.85em;">manipulation;humanoid</td>
+                        <td>US</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Nexdata Inc.</td>
+                        <td style="font-size: 0.85em;">manipulation;service</td>
+                        <td>US</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Rerun Inc.</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td>US</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Scale AI Inc.</td>
+                        <td style="font-size: 0.85em;">manipulation;embodied_ai</td>
+                        <td>US</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Encord Ltd.</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td>GB</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>AY-Robots</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td>DE</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Sensei</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td>US</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Lumos</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td>KR</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>RCSV</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td>US</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Labellerr</td>
+                        <td style="font-size: 0.85em;">manipulation;humanoid</td>
+                        <td>US</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Cogito Tech</td>
+                        <td style="font-size: 0.85em;">manipulation;defense;healthcare</td>
+                        <td>US</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Extend Robotics</td>
+                        <td style="font-size: 0.85em;">manipulation;humanoid</td>
+                        <td>GB</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Datoric</td>
+                        <td style="font-size: 0.85em;">manipulation</td>
+                        <td>US</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Data Demand Tab -->
+    <div id="modalities" class="tab-content">
+        <h2>Data Modality Demand Map</h2>
+        <h3>Top Modalities</h3>
+        <div class="card">
+            <div class="bar-chart">
+                <span class="bar-label">RGB</span>
+                <div class="bar" style="width: 300.0px;"></div>
+                <span class="bar-value">24</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">state</span>
+                <div class="bar" style="width: 275.0px;"></div>
+                <span class="bar-value">22</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">action</span>
+                <div class="bar" style="width: 250.0px;"></div>
+                <span class="bar-value">20</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">language</span>
+                <div class="bar" style="width: 75.0px;"></div>
+                <span class="bar-value">6</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">depth</span>
+                <div class="bar" style="width: 37.5px;"></div>
+                <span class="bar-value">3</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">multi_camera</span>
+                <div class="bar" style="width: 25.0px;"></div>
+                <span class="bar-value">2</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">gripper_state</span>
+                <div class="bar" style="width: 25.0px;"></div>
+                <span class="bar-value">2</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">IMU</span>
+                <div class="bar" style="width: 25.0px;"></div>
+                <span class="bar-value">2</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">joint_position</span>
+                <div class="bar" style="width: 12.5px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">joint_velocity</span>
+                <div class="bar" style="width: 12.5px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">motor_torque</span>
+                <div class="bar" style="width: 12.5px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">text</span>
+                <div class="bar" style="width: 12.5px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">video</span>
+                <div class="bar" style="width: 12.5px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">egocentric_video</span>
+                <div class="bar" style="width: 12.5px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">audio</span>
+                <div class="bar" style="width: 12.5px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+        </div>
+        <h3>Top Task Types</h3>
+        <div class="card">
+            <div class="bar-chart">
+                <span class="bar-label">manipulation</span>
+                <div class="bar" style="width: 300.0px;"></div>
+                <span class="bar-value">25</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">household</span>
+                <div class="bar" style="width: 96.0px;"></div>
+                <span class="bar-value">8</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">humanoid</span>
+                <div class="bar" style="width: 84.00000000000001px;"></div>
+                <span class="bar-value">7</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">dexterous</span>
+                <div class="bar" style="width: 60.0px;"></div>
+                <span class="bar-value">5</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">logistics</span>
+                <div class="bar" style="width: 36.0px;"></div>
+                <span class="bar-value">3</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">navigation</span>
+                <div class="bar" style="width: 36.0px;"></div>
+                <span class="bar-value">3</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">warehouse</span>
+                <div class="bar" style="width: 24.0px;"></div>
+                <span class="bar-value">2</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">mobile</span>
+                <div class="bar" style="width: 24.0px;"></div>
+                <span class="bar-value">2</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">whole_body</span>
+                <div class="bar" style="width: 12.0px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">locomotion</span>
+                <div class="bar" style="width: 12.0px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">assembly</span>
+                <div class="bar" style="width: 12.0px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">folding</span>
+                <div class="bar" style="width: 12.0px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">cable_routing</span>
+                <div class="bar" style="width: 12.0px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">packing</span>
+                <div class="bar" style="width: 12.0px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+            <div class="bar-chart">
+                <span class="bar-label">plugging</span>
+                <div class="bar" style="width: 12.0px;"></div>
+                <span class="bar-value">1</span>
+            </div>
+        </div>
+        <h3>Embodiments</h3>
+        <div class="card">
+            <table>
+                <thead><tr><th>Embodiment</th><th>Count</th></tr></thead>
+                <tbody><tr><td>multiple</td><td>13</td></tr><tr><td>humanoid</td><td>9</td></tr><tr><td>arm</td><td>1</td></tr><tr><td>human</td><td>1</td></tr><tr><td>mobile_manipulator</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h3>Collection Methods</h3>
+        <div class="card">
+            <table>
+                <thead><tr><th>Method</th><th>Count</th></tr></thead>
+                <tbody><tr><td>teleoperation</td><td>18</td></tr><tr><td>teleoperation;human_video</td><td>2</td></tr><tr><td>human_video</td><td>2</td></tr><tr><td>motion_capture</td><td>1</td></tr><tr><td>teleoperation;simulation</td><td>1</td></tr><tr><td>teleoperation;motion_capture</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Timeline Tab -->
+    <div id="timeline" class="tab-content">
+        <h2>Market Signal Timeline</h2>
+        <div class="card">
+            <h3>2023 (1 signals)</h3>
+            <table>
+                <thead><tr><th>Signal Type</th><th>Count</th></tr></thead>
+                <tbody><tr><td>model_launch</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h3>2024 (8 signals)</h3>
+            <table>
+                <thead><tr><th>Signal Type</th><th>Count</th></tr></thead>
+                <tbody><tr><td>funding_round</td><td>2</td></tr><tr><td>product_launch</td><td>2</td></tr><tr><td>model_launch</td><td>1</td></tr><tr><td>dataset_release</td><td>1</td></tr><tr><td>partnership</td><td>1</td></tr><tr><td>data_services_offering</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h3>2025 (17 signals)</h3>
+            <table>
+                <thead><tr><th>Signal Type</th><th>Count</th></tr></thead>
+                <tbody><tr><td>model_launch</td><td>7</td></tr><tr><td>data_services_offering</td><td>3</td></tr><tr><td>expansion</td><td>3</td></tr><tr><td>dataset_release</td><td>2</td></tr><tr><td>partnership</td><td>1</td></tr><tr><td>hiring_campaign</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h3>2026 (5 signals)</h3>
+            <table>
+                <thead><tr><th>Signal Type</th><th>Count</th></tr></thead>
+                <tbody><tr><td>dataset_release</td><td>2</td></tr><tr><td>data_services_offering</td><td>1</td></tr><tr><td>partnership</td><td>1</td></tr><tr><td>product_launch</td><td>1</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Measurability Tab -->
+    <div id="measurability" class="tab-content">
+        <h2>Measurability Assessment</h2>
+        <h3 style="color: var(--tier-a);">Directly Measurable</h3>
+        <div class="card"><p>• Number and timing of publicly released robot-learning datasets</p><p>• Dataset scale: trajectories, episodes, hours, tasks, embodiments, scenes</p><p>• Publicly stated use of teleoperation, demonstrations, human-motion data</p><p>• Geographic location of organizations and disclosed collection locations</p><p>• Frequency of evidence events over time</p><p>• Technology/task distribution: manipulation, bimanual, mobile, humanoid, logistics</p><p>• Open versus gated access, license conditions, commercial use status</p><p>• Number and type of public supplier claims and documented partnerships</p>
+        </div>
+        <h3 style="color: var(--tier-b);">Measurable with Integration</h3>
+        <div class="card"><p>• Growth in visible robotics-data activity using time-series index of releases, hiring, model launches</p><p>• Geographic clusters of likely demand using HQ, facilities, job locations</p><p>• Relationship between funding events and later data signals</p><p>• Company opportunity ranking based on explicit evidence and confidence-weighted score</p><p>• Supplier comparison based on modalities, formats, task coverage, customer proof</p><p>• Market gaps between open-data coverage and customer-specific requirements</p>
+        </div>
+        <h3 style="color: var(--tier-c);">Proxy Only</h3>
+        <div class="card"><p>• Growth in demand for robot demonstrations (job posts, dataset releases, model papers as proxies)</p><p>• Likelihood of external procurement (inferred from scale needs, hardware diversity, teleoperation programs)</p><p>• Addressable-market direction (observable signals rather than opaque market-size reports)</p><p>• Correlation between foundation-model activity and demand for multimodal data</p>
+        </div>
+        <h3 style="color: var(--tier-d);">Not Reliably Measurable</h3>
+        <div class="card"><p>• Total global spending on robot demonstration data</p><p>• Dataset contract prices, per-episode rates, teleoperator compensation, supplier margins</p><p>• Full proprietary dataset sizes for most companies</p><p>• All buyer-supplier relationships</p><p>• Exact internal versus outsourced share of collection</p><p>• Revenue attributable to robot-data services alone at diversified suppliers</p><p>• Company-level demand volumes unless disclosed in contracts, papers, or procurement</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Robotics Data Market Intelligence · Generated from evidence-backed seed data · Every claim is traceable to a source URL</p>
+        <p>Classification tiers: A = Confirmed buyer/user, B = Strong potential buyer, C = Possible buyer, D = Not enough evidence</p>
+    </div>
+</div>
+
+<script>
+    function showTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    function filterTable(tableId, searchId) {
+        const query = document.getElementById(searchId).value.toLowerCase();
+        const rows = document.querySelectorAll('#' + tableId + ' tbody tr');
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+        });
+    }
+
+    function filterByTier() {
+        const tier = document.getElementById('org-tier-filter').value;
+        const rows = document.querySelectorAll('#org-table tbody tr');
+        rows.forEach(row => {
+            if (!tier || row.dataset.tier === tier) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    function filterEvidence() {
+        const query = document.getElementById('evidence-search').value.toLowerCase();
+        const strength = document.getElementById('evidence-strength-filter').value;
+        const rows = document.querySelectorAll('.evidence-row');
+        rows.forEach(row => {
+            const text = row.dataset.search.toLowerCase();
+            const rowStrength = row.dataset.strength;
+            const textMatch = !query || text.includes(query);
+            const strengthMatch = !strength || rowStrength === strength;
+            row.style.display = (textMatch && strengthMatch) ? '' : 'none';
+        });
+    }
+</script>
+</body>
+</html>
