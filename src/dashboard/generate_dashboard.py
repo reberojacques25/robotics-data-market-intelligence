@@ -94,9 +94,12 @@ def generate_dashboard():
         .subtitle {{ color: var(--text-muted); margin-bottom: 30px; font-size: 0.95em; }}
         .stats-grid {{
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 30px;
+        }}
+        @media (max-width: 900px) {{
+            .stats-grid {{ grid-template-columns: repeat(2, 1fr); }}
         }}
         .stat-card {{
             background: var(--card-bg);
@@ -265,6 +268,7 @@ def generate_dashboard():
                     <tr>
                         <th>Organization</th>
                         <th>Tier</th>
+                        <th>Role</th>
                         <th>Direct Evidence</th>
                         <th>Data Reqs</th>
                         <th>Commercial Rel.</th>
@@ -276,8 +280,9 @@ def generate_dashboard():
     for r in sorted(opp, key=lambda x: (x["tier"], -x["direct_evidence_count"])):
         html += f"""
                     <tr>
-                        <td>{r['organization_id']}</td>
+                        <td>{r.get('organization_name', r['organization_id'])}<br><span style='font-size:0.8em;color:var(--text-muted)'>{r['organization_id']}</span></td>
                         <td><span class="tier-badge tier-{r['tier']}">{r['tier']}</span></td>
+                        <td><span style='font-size:0.85em'>{r.get('market_role', '')}</span></td>
                         <td>{r['direct_evidence_count']}</td>
                         <td>{r['data_requirement_count']}</td>
                         <td>{r['commercial_relationship_count']}</td>

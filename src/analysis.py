@@ -22,8 +22,11 @@ REPORTS_DIR.mkdir(exist_ok=True)
 def opportunity_classification():
     """Classify organizations into A/B/C/D buyer tiers based on evidence.
 
-    A. Confirmed buyer/user — direct evidence of purchasing, licensing, commissioning, or using external robotics data.
-    B. Strong potential buyer — substantial evidence of robotics-data requirements but no direct evidence of external purchasing.
+    CRITICAL DISTINCTION: This function classifies organizations as BUYERS of robotics data.
+    Suppliers (data_services_provider, dataset_provider) are classified separately.
+
+    A. Confirmed buyer — direct evidence of purchasing, licensing, or commissioning external robotics data.
+    B. Confirmed data user/collector — direct evidence of collecting or using robotics data, but no confirmed external purchasing.
     C. Possible buyer — relevant robotics/AI activity but insufficient evidence of a specific data requirement.
     D. Not enough evidence — excluded from opportunity analysis.
     """
@@ -52,6 +55,8 @@ def opportunity_classification():
         for _, row in commercial.iterrows():
             org_commercial[row["buyer_organization_id"]].append(row.to_dict())
         org_ids = orgs["organization_id"].tolist()
+        org_types = dict(zip(orgs["organization_id"], orgs["organization_type"]))
+        org_names = dict(zip(orgs["organization_id"], orgs["legal_name"]))
     else:
         for row in events:
             org_evidence[row["organization_id"]].append(row)
@@ -60,52 +65,74 @@ def opportunity_classification():
         for row in commercial:
             org_commercial[row["buyer_organization_id"]].append(row)
         org_ids = [o["organization_id"] for o in orgs]
+        org_types = {o["organization_id"]: o["organization_type"] for o in orgs}
+        org_names = {o["organization_id"]: o["legal_name"] for o in orgs}
+
+    SUPPLIER_TYPES = {"data_services_provider", "dataset_provider"}
 
     results = []
     for org_id in org_ids:
         evidence = org_evidence.get(org_id, [])
         reqs = org_data_reqs.get(org_id, [])
         comm = org_commercial.get(org_id, [])
+        org_type = org_types.get(org_id, "")
+        org_name = org_names.get(org_id, org_id)
 
         # Classification logic
         tier = "D"
         reason = "No evidence of robotics data activity"
+        market_role = "unknown"
 
         direct_evidence = [e for e in evidence if e.get("evidence_strength") == "direct"]
         strong_indirect = [e for e in evidence if e.get("evidence_strength") == "strong_indirect"]
         has_data_req = len(reqs) > 0
         has_commercial = len(comm) > 0
 
-        # Check for confirmed commercial relationships
-        confirmed_comm = [c for c in comm if c.get("status") == "confirmed"]
-        if has_commercial and confirmed_comm:
-            tier = "A"
-            reason = f"Confirmed commercial relationship(s): {len(confirmed_comm)} confirmed"
-        elif direct_evidence and has_data_req:
-            # Check if there's evidence of purchasing/external procurement
-            procurement_signals = [e for e in direct_evidence if e.get("signal_type") in ("procurement", "data_services_offering")]
-            if procurement_signals:
+        # Suppliers are classified by their supplier role, not as buyers
+        if org_type in SUPPLIER_TYPES:
+            market_role = "supplier"
+            # Check if supplier also has confirmed commercial relationships as a buyer
+            confirmed_comm = [c for c in comm if c.get("status") == "confirmed"]
+            if direct_evidence:
                 tier = "A"
-                reason = f"Direct evidence of procurement or data services: {len(procurement_signals)} signal(s)"
-            else:
+                reason = f"Supplier with direct evidence of data services offering ({len(direct_evidence)} direct signals)"
+            elif strong_indirect:
                 tier = "B"
-                reason = f"Direct evidence of data collection/use ({len(direct_evidence)} direct signals) but no confirmed external purchasing"
-        elif strong_indirect and has_data_req:
-            tier = "C"
-            reason = f"Strong indirect evidence ({len(strong_indirect)} signals) with data requirements"
-        elif direct_evidence:
-            tier = "C"
-            reason = f"Direct evidence of robotics activity ({len(direct_evidence)} signals) but no specific data requirement documented"
-        elif strong_indirect:
-            tier = "C"
-            reason = f"Some indirect evidence ({len(strong_indirect)} signals) but insufficient for specific data requirement"
-        elif evidence:
-            tier = "D"
-            reason = f"Weak or insufficient evidence ({len(evidence)} signals)"
+                reason = f"Supplier with indirect evidence ({len(strong_indirect)} signals)"
+            else:
+                tier = "C"
+                reason = "Supplier but limited public evidence of commercial activity"
+        else:
+            market_role = "buyer_candidate"
+            # Check for confirmed procurement (purchasing external data/robots for data collection)
+            procurement_signals = [e for e in direct_evidence if e.get("signal_type") == "procurement"]
+            confirmed_comm = [c for c in comm if c.get("status") == "confirmed" and c.get("relationship_type") == "purchase"]
+
+            if confirmed_comm or procurement_signals:
+                tier = "A"
+                reason = f"Confirmed procurement: {len(confirmed_comm)} purchase(s), {len(procurement_signals)} procurement signal(s)"
+            elif direct_evidence and has_data_req:
+                # Confirmed data user/collector but no confirmed external purchasing
+                tier = "B"
+                reason = f"Confirmed data user/collector: {len(direct_evidence)} direct evidence signal(s), {len(reqs)} data requirement(s), but no confirmed external purchasing"
+            elif direct_evidence:
+                tier = "C"
+                reason = f"Direct evidence of robotics activity ({len(direct_evidence)} signals) but no specific data requirement documented"
+            elif strong_indirect and has_data_req:
+                tier = "C"
+                reason = f"Strong indirect evidence ({len(strong_indirect)} signals) with data requirements"
+            elif strong_indirect:
+                tier = "C"
+                reason = f"Some indirect evidence ({len(strong_indirect)} signals) but insufficient for specific data requirement"
+            elif evidence:
+                tier = "D"
+                reason = f"Weak or insufficient evidence ({len(evidence)} signals)"
 
         results.append({
             "organization_id": org_id,
+            "organization_name": org_name,
             "tier": tier,
+            "market_role": market_role,
             "reason": reason,
             "direct_evidence_count": len(direct_evidence),
             "strong_indirect_count": len(strong_indirect),

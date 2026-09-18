@@ -4,44 +4,47 @@
 
 | Tier | Count | Description |
 |---|---|---|
-| A | 3 | Confirmed buyer/user — direct evidence of purchasing, licensing, commissioning, or using external robotics data |
-| B | 8 | Strong potential buyer — substantial evidence of data requirements but no direct evidence of external purchasing |
-| C | 22 | Possible buyer — relevant robotics/AI activity but insufficient evidence of a specific data requirement |
-| D | 14 | Not enough evidence — excluded from opportunity analysis |
+| A | 12 | Confirmed buyer/user — direct evidence of purchasing, licensing, commissioning, or using external robotics data |
+| B | 11 | Strong potential buyer — substantial evidence of data requirements but no direct evidence of external purchasing |
+| C | 13 | Possible buyer — relevant robotics/AI activity but insufficient evidence of a specific data requirement |
+| D | 11 | Not enough evidence — excluded from opportunity analysis |
 
 ### Detailed Classifications
 
 | Organization | Tier | Direct Evidence | Data Reqs | Commercial Rel. | Reason |
 |---|---|---|---|---|---|
-| ORG-001 | A | 6 | 4 | 2 | Confirmed commercial relationship(s): 2 confirmed |
-| ORG-002 | A | 4 | 3 | 1 | Confirmed commercial relationship(s): 1 confirmed |
-| ORG-007 | A | 1 | 1 | 1 | Confirmed commercial relationship(s): 1 confirmed |
-| ORG-003 | B | 1 | 1 | 0 | Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing |
-| ORG-004 | B | 1 | 1 | 0 | Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing |
-| ORG-005 | B | 2 | 1 | 0 | Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing |
-| ORG-019 | B | 2 | 2 | 0 | Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing |
-| ORG-021 | B | 1 | 2 | 0 | Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing |
-| ORG-026 | B | 2 | 1 | 0 | Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing |
-| ORG-027 | B | 1 | 1 | 0 | Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing |
-| ORG-030 | B | 1 | 1 | 0 | Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing |
-| ORG-006 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-008 | C | 0 | 1 | 1 | Strong indirect evidence (1 signals) with data requirements |
+| ORG-006 | A | 1 | 0 | 0 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-007 | A | 1 | 1 | 1 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-028 | A | 1 | 0 | 1 | Confirmed procurement: 1 purchase(s), 1 procurement signal(s) |
+| ORG-029 | A | 1 | 0 | 1 | Confirmed procurement: 1 purchase(s), 1 procurement signal(s) |
+| ORG-031 | A | 1 | 0 | 1 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-033 | A | 1 | 0 | 1 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-034 | A | 1 | 0 | 0 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-035 | A | 1 | 0 | 0 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-036 | A | 1 | 0 | 0 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-037 | A | 1 | 0 | 0 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-038 | A | 1 | 0 | 0 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-039 | A | 1 | 0 | 0 | Supplier with direct evidence of data services offering (1 direct signals) |
+| ORG-001 | B | 6 | 4 | 0 | Confirmed data user/collector: 6 direct evidence signal(s), 4 data requirement(s), but no confirmed external purchasing |
+| ORG-002 | B | 4 | 3 | 0 | Confirmed data user/collector: 4 direct evidence signal(s), 3 data requirement(s), but no confirmed external purchasing |
+| ORG-003 | B | 1 | 1 | 0 | Confirmed data user/collector: 1 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing |
+| ORG-004 | B | 1 | 1 | 0 | Confirmed data user/collector: 1 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing |
+| ORG-005 | B | 2 | 1 | 0 | Confirmed data user/collector: 2 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing |
+| ORG-008 | B | 0 | 1 | 1 | Supplier with indirect evidence (1 signals) |
+| ORG-019 | B | 2 | 2 | 0 | Confirmed data user/collector: 2 direct evidence signal(s), 2 data requirement(s), but no confirmed external purchasing |
+| ORG-021 | B | 1 | 2 | 0 | Confirmed data user/collector: 1 direct evidence signal(s), 2 data requirement(s), but no confirmed external purchasing |
+| ORG-026 | B | 2 | 1 | 0 | Confirmed data user/collector: 2 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing |
+| ORG-027 | B | 1 | 1 | 0 | Confirmed data user/collector: 1 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing |
+| ORG-030 | B | 1 | 1 | 0 | Confirmed data user/collector: 1 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing |
 | ORG-010 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
 | ORG-011 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
 | ORG-013 | C | 0 | 1 | 0 | Strong indirect evidence (1 signals) with data requirements |
 | ORG-020 | C | 0 | 1 | 0 | Strong indirect evidence (1 signals) with data requirements |
 | ORG-023 | C | 0 | 1 | 0 | Strong indirect evidence (1 signals) with data requirements |
 | ORG-024 | C | 0 | 0 | 0 | Some indirect evidence (1 signals) but insufficient for specific data requirement |
-| ORG-028 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-029 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-031 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-033 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-034 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-035 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-036 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-037 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-038 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
-| ORG-039 | C | 1 | 0 | 0 | Direct evidence of robotics activity (1 signals) but no specific data requirement documented |
+| ORG-025 | C | 0 | 0 | 0 | Supplier but limited public evidence of commercial activity |
+| ORG-032 | C | 0 | 0 | 0 | Supplier but limited public evidence of commercial activity |
+| ORG-040 | C | 0 | 0 | 0 | Supplier but limited public evidence of commercial activity |
 | ORG-041 | C | 0 | 1 | 0 | Strong indirect evidence (1 signals) with data requirements |
 | ORG-042 | C | 0 | 0 | 0 | Some indirect evidence (1 signals) but insufficient for specific data requirement |
 | ORG-044 | C | 0 | 1 | 0 | Strong indirect evidence (1 signals) with data requirements |
@@ -54,9 +57,6 @@
 | ORG-017 | D | 0 | 0 | 0 | No evidence of robotics data activity |
 | ORG-018 | D | 0 | 0 | 0 | No evidence of robotics data activity |
 | ORG-022 | D | 0 | 0 | 0 | No evidence of robotics data activity |
-| ORG-025 | D | 0 | 0 | 0 | No evidence of robotics data activity |
-| ORG-032 | D | 0 | 0 | 0 | No evidence of robotics data activity |
-| ORG-040 | D | 0 | 0 | 0 | No evidence of robotics data activity |
 | ORG-043 | D | 0 | 0 | 0 | No evidence of robotics data activity |
 | ORG-046 | D | 0 | 0 | 0 | No evidence of robotics data activity |
 | ORG-047 | D | 0 | 0 | 0 | No evidence of robotics data activity |

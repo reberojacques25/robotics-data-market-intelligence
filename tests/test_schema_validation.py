@@ -165,3 +165,79 @@ class TestSecurity:
                 f"Possible password in {csv_file.name}"
             assert "api_key" not in content.lower(), f"Possible API key in {csv_file.name}"
             assert "bearer " not in content.lower(), f"Possible bearer token in {csv_file.name}"
+
+
+class TestSourceAudit:
+    """Audit source URLs and evidence integrity."""
+
+    def test_no_placeholder_urls(self):
+        """No evidence event should have a placeholder or empty URL."""
+        events = load_table("evidence_events")
+        try:
+            import pandas as pd
+            for _, row in events.iterrows():
+                url = str(row.get("source_url", ""))
+                assert url.startswith("http"), f"Event {row.get('event_id')} has invalid URL: {url}"
+        except ImportError:
+            for row in events:
+                url = str(row.get("source_url", ""))
+                assert url.startswith("http"), f"Event {row.get('event_id')} has invalid URL: {url}"
+
+    def test_verified_rows_have_primary_sources(self):
+        """Verified evidence should come from primary source types."""
+        events = load_table("evidence_events")
+        primary_types = {"company_page", "academic_paper", "dataset_card", "press_release", "job_post", "project_page"}
+        try:
+            import pandas as pd
+            verified = events[events["review_status"] == "verified"]
+            for _, row in verified.iterrows():
+                src_type = row.get("source_type", "")
+                assert src_type in primary_types, \
+                    f"Verified event {row.get('event_id')} has non-primary source_type: {src_type}"
+        except ImportError:
+            for row in events:
+                if row.get("review_status") == "verified":
+                    src_type = row.get("source_type", "")
+                    assert src_type in primary_types, \
+                        f"Verified event {row.get('event_id')} has non-primary source_type: {src_type}"
+
+    def test_no_token_in_tracked_files(self):
+        """Scan all tracked files for common credential patterns."""
+        import subprocess
+        result = subprocess.run(
+            ["rg", "-l", "github_pat_|ghp_|sk-[a-zA-Z0-9]{20,}|api_key|bearer\\s", "."],
+            capture_output=True, text=True, cwd=str(Path(__file__).parent.parent)
+        )
+        # Filter out test files that mention these patterns in assertions
+        tracked = [f for f in result.stdout.strip().split("\n") if f and "test_" not in f and ".gitignore" not in f]
+        assert len(tracked) == 0, f"Possible credentials found in: {tracked}"
+
+    def test_no_token_in_git_config(self):
+        """Git config should not contain any tokens or credentials."""
+        import subprocess
+        result = subprocess.run(
+            ["git", "config", "--local", "--list"],
+            capture_output=True, text=True, cwd=str(Path(__file__).parent.parent)
+        )
+        config = result.stdout
+        assert "github_pat_" not in config, "Token found in git config"
+        assert "ghp_" not in config, "GitHub token found in git config"
+        assert "password=" not in config.lower(), "Password found in git config"
+
+    def test_no_large_tracked_files(self):
+        """Check git-tracked files for large files."""
+        import subprocess
+        result = subprocess.run(
+            ["git", "ls-files"],
+            capture_output=True, text=True, cwd=str(Path(__file__).parent.parent)
+        )
+        files = result.stdout.strip().split("\n")
+        large = []
+        for f in files:
+            if f:
+                fpath = Path(__file__).parent.parent / f
+                if fpath.exists():
+                    size = fpath.stat().st_size
+                    if size > 5 * 1024 * 1024:  # 5 MB
+                        large.append(f"{f}: {size / 1024 / 1024:.1f} MB")
+        assert len(large) == 0, f"Large tracked files: {large}"

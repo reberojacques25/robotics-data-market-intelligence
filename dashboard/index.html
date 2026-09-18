@@ -34,9 +34,12 @@
         .subtitle { color: var(--text-muted); margin-bottom: 30px; font-size: 0.95em; }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 30px;
+        }
+        @media (max-width: 900px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
         .stat-card {
             background: var(--card-bg);
@@ -176,22 +179,22 @@
                 <tbody>
                     <tr>
                         <td><span class="tier-badge tier-A">A</span></td>
-                        <td>3</td>
+                        <td>12</td>
                         <td>Confirmed buyer/user — direct evidence of purchasing, licensing, commissioning, or using external robotics data</td>
                     </tr>
                     <tr>
                         <td><span class="tier-badge tier-B">B</span></td>
-                        <td>8</td>
+                        <td>11</td>
                         <td>Strong potential buyer — substantial evidence of data requirements but no direct evidence of external purchasing</td>
                     </tr>
                     <tr>
                         <td><span class="tier-badge tier-C">C</span></td>
-                        <td>22</td>
+                        <td>13</td>
                         <td>Possible buyer — relevant robotics/AI activity but insufficient evidence of a specific data requirement</td>
                     </tr>
                     <tr>
                         <td><span class="tier-badge tier-D">D</span></td>
-                        <td>14</td>
+                        <td>11</td>
                         <td>Not enough evidence — excluded from opportunity analysis</td>
                     </tr>
                 </tbody>
@@ -204,6 +207,7 @@
                     <tr>
                         <th>Organization</th>
                         <th>Tier</th>
+                        <th>Role</th>
                         <th>Direct Evidence</th>
                         <th>Data Reqs</th>
                         <th>Commercial Rel.</th>
@@ -212,376 +216,423 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>ORG-001</td>
+                        <td>Hugging Face Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-006</span></td>
                         <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>Claru<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-007</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>UBTech Robotics<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-028</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Confirmed procurement: 1 purchase(s), 1 procurement signal(s)</td>
+                    </tr>
+                    <tr>
+                        <td>China Mobile<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-029</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Confirmed procurement: 1 purchase(s), 1 procurement signal(s)</td>
+                    </tr>
+                    <tr>
+                        <td>Scale AI Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-031</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>AY-Robots<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-033</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>Sensei<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-034</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>Lumos<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-035</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>RCSV<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-036</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>Labellerr<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-037</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>Cogito Tech<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-038</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>Extend Robotics<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-039</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier with direct evidence of data services offering (1 direct signals)</td>
+                    </tr>
+                    <tr>
+                        <td>Figure AI Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-001</span></td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>6</td>
                         <td>4</td>
-                        <td>2</td>
-                        <td style="font-size: 0.85em;">Confirmed commercial relationship(s): 2 confirmed</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 6 direct evidence signal(s), 4 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-002</td>
-                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td>Physical Intelligence Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-002</span></td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>4</td>
                         <td>3</td>
-                        <td>1</td>
-                        <td style="font-size: 0.85em;">Confirmed commercial relationship(s): 1 confirmed</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 4 direct evidence signal(s), 3 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-007</td>
-                        <td><span class="tier-badge tier-A">A</span></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td style="font-size: 0.85em;">Confirmed commercial relationship(s): 1 confirmed</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-005</td>
+                        <td>NVIDIA Corporation<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-005</span></td>
                         <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>2</td>
                         <td>1</td>
                         <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 2 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-019</td>
+                        <td>Google DeepMind<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-019</span></td>
                         <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>2</td>
                         <td>2</td>
                         <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 2 direct evidence signal(s), 2 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-026</td>
+                        <td>Zhiyuan Robotics<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-026</span></td>
                         <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>2</td>
                         <td>1</td>
                         <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (2 direct signals) but no confirmed external purchasing</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 2 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-003</td>
+                        <td>Skild AI Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-003</span></td>
                         <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>1</td>
                         <td>1</td>
                         <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 1 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-004</td>
+                        <td>Toyota Research Institute<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-004</span></td>
                         <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>1</td>
                         <td>1</td>
                         <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 1 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-021</td>
+                        <td>Tesla Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-021</span></td>
                         <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>1</td>
                         <td>2</td>
                         <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 1 direct evidence signal(s), 2 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-027</td>
+                        <td>JD.com<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-027</span></td>
                         <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>1</td>
                         <td>1</td>
                         <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 1 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-030</td>
+                        <td>Apple Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-030</span></td>
                         <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>1</td>
                         <td>1</td>
                         <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of data collection/use (1 direct signals) but no confirmed external purchasing</td>
+                        <td style="font-size: 0.85em;">Confirmed data user/collector: 1 direct evidence signal(s), 1 data requirement(s), but no confirmed external purchasing</td>
                     </tr>
                     <tr>
-                        <td>ORG-006</td>
+                        <td>Nexdata Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-008</span></td>
+                        <td><span class="tier-badge tier-B">B</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td style="font-size: 0.85em;">Supplier with indirect evidence (1 signals)</td>
+                    </tr>
+                    <tr>
+                        <td>Stanford University<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-010</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>1</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
                     </tr>
                     <tr>
-                        <td>ORG-010</td>
+                        <td>University of California Berkeley<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-011</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>1</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
                     </tr>
                     <tr>
-                        <td>ORG-011</td>
+                        <td>1X Technologies<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-013</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-028</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-029</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-031</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-033</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-034</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-035</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-036</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-037</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-038</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-039</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">Direct evidence of robotics activity (1 signals) but no specific data requirement documented</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-008</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-013</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>1</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
                     </tr>
                     <tr>
-                        <td>ORG-020</td>
+                        <td>Meta AI<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-020</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>1</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
                     </tr>
                     <tr>
-                        <td>ORG-023</td>
+                        <td>AWS Robotics<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-023</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>1</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
                     </tr>
                     <tr>
-                        <td>ORG-024</td>
+                        <td>Symbotic Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-024</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Some indirect evidence (1 signals) but insufficient for specific data requirement</td>
                     </tr>
                     <tr>
-                        <td>ORG-041</td>
+                        <td>Rerun Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-025</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier but limited public evidence of commercial activity</td>
+                    </tr>
+                    <tr>
+                        <td>Encord Ltd.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-032</span></td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier but limited public evidence of commercial activity</td>
+                    </tr>
+                    <tr>
+                        <td>Datoric<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-040</span></td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>supplier</span></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td style="font-size: 0.85em;">Supplier but limited public evidence of commercial activity</td>
+                    </tr>
+                    <tr>
+                        <td>Waymo LLC<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-041</span></td>
+                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>1</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
                     </tr>
                     <tr>
-                        <td>ORG-042</td>
+                        <td>Zoox<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-042</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Some indirect evidence (1 signals) but insufficient for specific data requirement</td>
                     </tr>
                     <tr>
-                        <td>ORG-044</td>
+                        <td>OpenAI<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-044</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>1</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
                     </tr>
                     <tr>
-                        <td>ORG-045</td>
+                        <td>BMW Group<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-045</span></td>
                         <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>1</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">Strong indirect evidence (1 signals) with data requirements</td>
                     </tr>
                     <tr>
-                        <td>ORG-009</td>
+                        <td>Open X-Embodiment Consortium<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-009</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-012</td>
+                        <td>Microsoft Corporation<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-012</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-014</td>
+                        <td>Agility Robotics Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-014</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-015</td>
+                        <td>Apptronik Inc.<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-015</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-016</td>
+                        <td>Sanctuary Cognitive Systems Corporation<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-016</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-017</td>
+                        <td>Boston Dynamics<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-017</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-018</td>
+                        <td>Covariant<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-018</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-022</td>
+                        <td>Unitree Robotics<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-022</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-025</td>
+                        <td>Berkshire Grey<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-043</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-032</td>
+                        <td>Sereact<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-046</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
                         <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
                     </tr>
                     <tr>
-                        <td>ORG-040</td>
+                        <td>Avatar Robotics<br><span style='font-size:0.8em;color:var(--text-muted)'>ORG-047</span></td>
                         <td><span class="tier-badge tier-D">D</span></td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-043</td>
-                        <td><span class="tier-badge tier-D">D</span></td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-046</td>
-                        <td><span class="tier-badge tier-D">D</span></td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td style="font-size: 0.85em;">No evidence of robotics data activity</td>
-                    </tr>
-                    <tr>
-                        <td>ORG-047</td>
-                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span style='font-size:0.85em'>buyer_candidate</span></td>
                         <td>0</td>
                         <td>0</td>
                         <td>0</td>
@@ -620,23 +671,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-tier="A">
+                    <tr data-tier="B">
                         <td>ORG-001</td>
                         <td>Figure AI Inc.</td>
                         <td>foundation_model_developer</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">humanoid</td>
-                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span class="tier-badge tier-B">B</span></td>
                         <td>6</td>
                         <td>4</td>
                     </tr>
-                    <tr data-tier="A">
+                    <tr data-tier="B">
                         <td>ORG-002</td>
                         <td>Physical Intelligence Inc.</td>
                         <td>foundation_model_developer</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-A">A</span></td>
+                        <td><span class="tier-badge tier-B">B</span></td>
                         <td>4</td>
                         <td>3</td>
                     </tr>
@@ -670,13 +721,13 @@
                         <td>2</td>
                         <td>1</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-006</td>
                         <td>Hugging Face Inc.</td>
                         <td>dataset_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
@@ -690,13 +741,13 @@
                         <td>1</td>
                         <td>1</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="B">
                         <td>ORG-008</td>
                         <td>Nexdata Inc.</td>
                         <td>data_services_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation;service</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-B">B</span></td>
                         <td>1</td>
                         <td>1</td>
                     </tr>
@@ -860,13 +911,13 @@
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="D">
+                    <tr data-tier="C">
                         <td>ORG-025</td>
                         <td>Rerun Inc.</td>
                         <td>data_services_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span class="tier-badge tier-C">C</span></td>
                         <td>0</td>
                         <td>0</td>
                     </tr>
@@ -890,23 +941,23 @@
                         <td>1</td>
                         <td>1</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-028</td>
                         <td>UBTech Robotics</td>
                         <td>robot_oem</td>
                         <td>CN</td>
                         <td style="font-size: 0.85em;">humanoid</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-029</td>
                         <td>China Mobile</td>
                         <td>public_buyer</td>
                         <td>CN</td>
                         <td style="font-size: 0.85em;">telecommunication;robotics</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
@@ -920,103 +971,103 @@
                         <td>1</td>
                         <td>1</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-031</td>
                         <td>Scale AI Inc.</td>
                         <td>data_services_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation;embodied_ai</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="D">
+                    <tr data-tier="C">
                         <td>ORG-032</td>
                         <td>Encord Ltd.</td>
                         <td>data_services_provider</td>
                         <td>GB</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span class="tier-badge tier-C">C</span></td>
                         <td>0</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-033</td>
                         <td>AY-Robots</td>
                         <td>data_services_provider</td>
                         <td>DE</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-034</td>
                         <td>Sensei</td>
                         <td>data_services_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-035</td>
                         <td>Lumos</td>
                         <td>data_services_provider</td>
                         <td>KR</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-036</td>
                         <td>RCSV</td>
                         <td>data_services_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-037</td>
                         <td>Labellerr</td>
                         <td>data_services_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation;humanoid</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-038</td>
                         <td>Cogito Tech</td>
                         <td>data_services_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation;defense;healthcare</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="C">
+                    <tr data-tier="A">
                         <td>ORG-039</td>
                         <td>Extend Robotics</td>
                         <td>data_services_provider</td>
                         <td>GB</td>
                         <td style="font-size: 0.85em;">manipulation;humanoid</td>
-                        <td><span class="tier-badge tier-C">C</span></td>
+                        <td><span class="tier-badge tier-A">A</span></td>
                         <td>1</td>
                         <td>0</td>
                     </tr>
-                    <tr data-tier="D">
+                    <tr data-tier="C">
                         <td>ORG-040</td>
                         <td>Datoric</td>
                         <td>data_services_provider</td>
                         <td>US</td>
                         <td style="font-size: 0.85em;">manipulation</td>
-                        <td><span class="tier-badge tier-D">D</span></td>
+                        <td><span class="tier-badge tier-C">C</span></td>
                         <td>0</td>
                         <td>0</td>
                     </tr>
